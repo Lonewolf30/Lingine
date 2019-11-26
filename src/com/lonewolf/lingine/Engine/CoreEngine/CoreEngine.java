@@ -2,12 +2,15 @@ package com.lonewolf.lingine.Engine.CoreEngine;
 
 import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
 import com.lonewolf.lingine.Logger;
+import com.lonewolf.lingine.Main;
+import com.lonewolf.lingine.Modules.ModuleLoader;
 
 import java.io.File;
 
 public class CoreEngine
 {
 	private Game game;
+	private ModuleLoader loader;
 	private Configuration configuration;
 	private RenderingEngine renderEngine;
 	private float delta;
@@ -20,10 +23,13 @@ public class CoreEngine
 		configuration = new Configuration();
 		configuration.loadConfigurationFile(new File("settings"));
 		Logger.setDebugLog(configuration.getConfig("debugLog", false));
+		Main.saveLogs = configuration.getConfig("saveLog", true);
 		Logger.LogD("Engine Start");
 		this.game = game;
 		this.frameSkip = configuration.getConfig("frameSkip", false);
 		isRunning = false;
+		loader = new ModuleLoader();
+		loader.loadModules();
 	}
 	
 	public void start()

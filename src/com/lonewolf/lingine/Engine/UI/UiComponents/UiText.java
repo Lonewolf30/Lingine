@@ -30,10 +30,10 @@ public class UiText extends UiBlock
 		int h = 16;
 		Graphics2D g2d = img.createGraphics();
 		g2d.setPaint(color.getColor());
-		g2d.setFont(new Font("Arial", Font.PLAIN, (int)(img.getHeight() * 0.5f)));
+		g2d.setFont(new Font("Tahoma", Font.PLAIN, (int)(img.getHeight() * 0.5f)));
 		FontMetrics fm = g2d.getFontMetrics();
 		int x = (img.getWidth() - fm.stringWidth(text))/2;
-		int y = fm.getHeight() + fm.getHeight()/4;
+		int y = fm.getHeight() + fm.getHeight()/100000;
 		g2d.drawString(text, x, y/0.9f);
 		g2d.dispose();
 		

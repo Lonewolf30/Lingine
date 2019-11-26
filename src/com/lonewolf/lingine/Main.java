@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Main
 {
 	private static ArrayList<Thread> engines = new ArrayList<>();
+	public static boolean saveLogs = true;
 
 	public static void main(String[] args)
 	{
@@ -35,7 +36,8 @@ public class Main
 		}
 
 		Logger.LogI("Program End");
-		logger.saveLogs();
+		if (saveLogs)
+			logger.saveLogs();
 	}
 
 	public static void addEngine(@NotNull CoreEngine engine)

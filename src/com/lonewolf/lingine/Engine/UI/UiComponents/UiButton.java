@@ -34,6 +34,9 @@ public abstract class UiButton extends UiBlock
 		windowSize = engine.getRenderEngine().getWindow().getWindowSize();
 	}
 	
+	public void animation(){}
+	public void reverseAnimation(){}
+	
 	public abstract void run();
 	
 	@Override
@@ -51,6 +54,7 @@ public abstract class UiButton extends UiBlock
 				{
 					color.inc(-(int)colorShift);
 					generateTexture();
+					animation();
 					inced = true;
 				}
 				
@@ -67,6 +71,7 @@ public abstract class UiButton extends UiBlock
 		{
 			color.inc((int)colorShift);
 			generateTexture();
+			reverseAnimation();
 			inced = false;
 		}
 		

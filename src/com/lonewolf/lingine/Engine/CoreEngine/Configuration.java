@@ -99,7 +99,7 @@ public class Configuration
 	{
 		try
 		{
-			BufferedWriter writer = new BufferedWriter(new FileWriter(getDirectory().getAbsoluteFile() + "/" + configName + ".config"));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(getDirectory().getAbsoluteFile() + "/" + configName + ".cfg"));
 			
 			for (Map.Entry<String, String> entry : configs.entrySet())
 			{
