@@ -59,6 +59,8 @@ public class CoreEngine
 		Logger.LogD("Main Game Loop Start");
 		renderEngine = new RenderingEngine();
 		game.setRenderingEngine(renderEngine);
+		game.setWindowAttrib(renderEngine.getWindow());
+		renderEngine.loadAll();
 		game.setEngine(this);
 		game.init();
 		

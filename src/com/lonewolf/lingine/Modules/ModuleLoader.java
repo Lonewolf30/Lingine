@@ -42,6 +42,10 @@ public class ModuleLoader
 					Module module = new Module(jar, mod.getPath());
 					module.loadMainClass();
 					modules.put(module.getModuleName(), module);
+					if (module.getErros().size() > 1)
+					{
+					
+					}
 				} catch (Exception e)
 				{
 					Logger.LogE(e);

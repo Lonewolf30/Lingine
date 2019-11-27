@@ -36,6 +36,7 @@ public class Main
 		}
 
 		Logger.LogI("Program End");
+		
 		if (saveLogs)
 			logger.saveLogs();
 	}

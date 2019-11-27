@@ -25,9 +25,11 @@ public class UiText extends UiBlock
 	
 	private BufferedImage getImage(Vector2f size)
 	{
+		if (size.GetX() < 1)
+			size.SetX(1);
+		if (size.GetY() < 1)
+			size.SetY(1);
 		BufferedImage img = new BufferedImage((int)size.GetX() , (int)size.GetY(), BufferedImage.TYPE_INT_ARGB);
-		int w = 16 * text.length();
-		int h = 16;
 		Graphics2D g2d = img.createGraphics();
 		g2d.setPaint(color.getColor());
 		g2d.setFont(new Font("Tahoma", Font.PLAIN, (int)(img.getHeight() * 0.5f)));

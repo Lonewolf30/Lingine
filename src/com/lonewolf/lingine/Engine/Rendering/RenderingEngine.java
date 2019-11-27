@@ -25,43 +25,19 @@ public class RenderingEngine extends MappedValues
 	private Shader gui;
 	private Camera m_mainCamera;
 	private Window window;
+	private boolean resized;
 
 	public RenderingEngine()
 	{
 		super();
 		
 		window = new Window();
-		window.createDisplay();
-		
-		m_lights = new ArrayList<BaseLight>();
-		m_samplerMap = new HashMap<String, Integer>();
-		m_samplerMap.put("diffuse", 0);
-		m_samplerMap.put("normalMap", 1);
-		m_samplerMap.put("dispMap", 2);
-
-		AddVector3f("ambient", new Vector3f(0.1f, 0.1f, 0.1f));
-
-		m_forwardAmbient = new Shader("forward-ambient");
-		gui = new Shader("shader2d");
-
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-		glFrontFace(GL_CW);
-		glCullFace(GL_BACK);
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
-		
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		//
-		// glEnable(GL_DEPTH_CLAMP);
-
-		glEnable(GL_TEXTURE_2D);
+		window.setRenderEngine(this);
 	}
 	
-	public void setDisplayResized(Boolean resized)
+	public void setDisplayResized(boolean resized)
 	{
-	
+		this.resized = resized;
 	}
 
 	public void UpdateUniformStruct(Transform transform, Material material, Shader shader, String uniformName, String uniformType)
@@ -109,14 +85,17 @@ public class RenderingEngine extends MappedValues
 		window.loadGlCap();
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
-		
+		if (resized)
+			uielements.forEach(element -> element.resized(this));
 		gui.SetUniform("windowSize", window.getWindowSize());
 		uielements.forEach(element -> element.render(gui, this));
 		
-		
+		resized = false;
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_DEPTH_TEST);
 	}
+	
+	
 
 	public static String GetOpenGLVersion()
 	{
@@ -161,5 +140,34 @@ public class RenderingEngine extends MappedValues
 	public void update()
 	{
 		window.update();
+	}
+	
+	public void loadAll()
+	{
+		window = window.createWidow();
+		window.createDisplay();
+		
+		m_lights = new ArrayList<BaseLight>();
+		m_samplerMap = new HashMap<String, Integer>();
+		m_samplerMap.put("diffuse", 0);
+		m_samplerMap.put("normalMap", 1);
+		m_samplerMap.put("dispMap", 2);
+		
+		AddVector3f("ambient", new Vector3f(0.1f, 0.1f, 0.1f));
+		
+		m_forwardAmbient = new Shader("forward-ambient");
+		gui = new Shader("shader2d");
+		
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		
+		glFrontFace(GL_CW);
+		glCullFace(GL_BACK);
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+		
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		
+		glEnable(GL_TEXTURE_2D);
 	}
 }

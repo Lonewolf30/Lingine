@@ -6,6 +6,7 @@ import com.lonewolf.lingine.Logger;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -21,10 +22,13 @@ public class Module
 	private Method moduleLoadMethod;
 	private boolean enable;
 	
+	private ArrayList<String> erros;
+	
 	public Module(JarFile module, String path)
 	{
 		this.module = module;
 		this.path = path;
+		erros = new ArrayList<>();
 	}
 	
 	public void loadMainClass()
@@ -56,8 +60,11 @@ public class Module
 				if (meth.getName().equals("moduleLoad"))
 				{
 					moduleLoadMethod = meth;
+					return;
 				}
 			}
+			
+			erros.add("No moduleLoad method found");
 		} catch (Exception e)
 		{
 			Logger.LogE(e);
@@ -89,5 +96,10 @@ public class Module
 		{
 			Logger.LogE(e);
 		}
+	}
+	
+	public ArrayList<String> getErros()
+	{
+		return erros;
 	}
 }
