@@ -88,6 +88,7 @@ public class UiObject
 		this.engine = engine;
 		components.forEach(component -> component.setEngine(engine));
 		children.forEach(child -> child.setEngine(engine));
+		modifer.resized(engine.getRenderEngine().getWindow());
 	}
 	
 	public void setParent(UiObject parent)

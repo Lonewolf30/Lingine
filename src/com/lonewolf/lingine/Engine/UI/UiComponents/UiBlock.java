@@ -41,7 +41,7 @@ public class UiBlock extends UiComponent
 	public void render(Shader shader, RenderingEngine renderEngine)
 	{
 		Vector2f location = parent.getTransformedPos();
-		Vector2f scale = parent.getTransformedScale();
+		Vector2f scale = parent.getTransformedScale().Div(renderEngine.getWindow().getWindowSize());
 		
 		shader.SetUniform("scale", scale);
 		shader.SetUniform("offset", location.Sub(renderEngine.getWindow().getWindowSize().Div(2)).Div(renderEngine.getWindow().getWindowSize().Div(2)));

@@ -10,6 +10,7 @@ import com.lonewolf.lingine.Engine.UI.UIScalation.AspectContraint;
 import com.lonewolf.lingine.Engine.UI.UIScalation.ParentScale;
 import com.lonewolf.lingine.Engine.UI.UIScalation.PixelScale;
 import com.lonewolf.lingine.Engine.UI.UIScalation.WindowScale;
+import com.lonewolf.lingine.Engine.UI.UITranslation.PercentTranlation;
 import com.lonewolf.lingine.Engine.UI.UITranslation.PixelTranslation;
 import com.lonewolf.lingine.Engine.UI.UiColor;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiBlock;
@@ -29,8 +30,8 @@ public class MainMenu extends Game
 	@Override
 	public void setWindowAttrib(Window window)
 	{
-//		window.setFullscreen();
-//		window.setFloatingPane();
+		window.setFullscreen();
+		window.setFloatingPane();
 	}
 	
 	@Override
@@ -41,8 +42,8 @@ public class MainMenu extends Game
 
 		modifier.setWidth(new WindowScale(0.5f));
 		modifier.setHeight(new AspectContraint());
-		modifier.setX(new PixelTranslation(0));
-		modifier.setY(new PixelTranslation(0));
+		modifier.setX(new PercentTranlation(0.5f));
+		modifier.setY(new PercentTranlation(0.5f));
 		
 		background.setModifer(modifier);
 		addUiElement(background);
