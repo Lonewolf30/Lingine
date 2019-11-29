@@ -3,12 +3,12 @@ package com.lonewolf.lingine.Engine.UI.UIScalation;
 import com.lonewolf.lingine.Engine.Rendering.Window;
 import com.lonewolf.lingine.Engine.UI.UiObject;
 
-public class AspectContraint implements IScalation
+public class AspectScale implements IScalation
 {
 	private int height;
 	private UiObject parent;
 	
-	public AspectContraint()
+	public AspectScale()
 	{
 		height = 0;
 	}
@@ -29,7 +29,7 @@ public class AspectContraint implements IScalation
 	@Override
 	public int getWidth()
 	{
-		if (parent.getModifer().widthScale() instanceof AspectContraint)
+		if (parent.getModifer().widthScale() instanceof AspectScale)
 			return 0;
 		return parent.getModifer().getWidth();
 	}
