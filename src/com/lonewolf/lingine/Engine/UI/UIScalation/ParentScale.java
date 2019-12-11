@@ -27,8 +27,8 @@ public class ParentScale implements IScalation
 	@Override
 	public void calculateScalation(Window window)
 	{
-		width = (int) (parent.getModifer().getWidth() * scale);
-		height = (int) (parent.getModifer().getHeight() * scale);
+		width = (int) (parent.getModifier().getWidth() * scale);
+		height = (int) (parent.getModifier().getHeight() * scale);
 	}
 	
 	@Override

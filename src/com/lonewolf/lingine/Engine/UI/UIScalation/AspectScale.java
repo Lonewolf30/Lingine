@@ -29,9 +29,9 @@ public class AspectScale implements IScalation
 	@Override
 	public int getWidth()
 	{
-		if (parent.getModifer().widthScale() instanceof AspectScale)
+		if (parent.getModifier().widthScale() instanceof AspectScale)
 			return 0;
-		return parent.getModifer().getWidth();
+		return parent.getModifier().getWidth();
 	}
 	
 	@Override

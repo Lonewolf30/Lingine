@@ -5,14 +5,17 @@ import com.lonewolf.lingine.Scenes.MainMenu;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main
 {
 	private static ArrayList<Thread> engines = new ArrayList<>();
-	public static boolean saveLogs = true;
+	private static boolean saveLogs = true;
 
 	public static void main(String[] args)
 	{
+		loadargs(args);
+		
 		Logger logger = new Logger();
 		Logger.LogI("Main Program Start");
 
@@ -20,7 +23,6 @@ public class Main
                 new CoreEngine(new MainMenu()).start());
 		engines.add(thread1);
 		engines.get(engines.size() - 1).start();
-		engines.get(engines.size() - 1).setPriority(Thread.MAX_PRIORITY);
 
 		while (!engines.isEmpty())
 		{
@@ -40,6 +42,20 @@ public class Main
 		if (saveLogs)
 			logger.saveLogs();
 	}
+	
+	private static void loadargs(String[] args)
+	{
+		HashMap<String, String> values = new HashMap<>();
+		for (String string:args)
+		{
+			String[] val = string.split("=");
+			values.put(val[0],val[1]);
+		}
+		
+		saveLogs = values.containsKey("saveLog") && Boolean.parseBoolean(values.get("saveLogs"));
+		Logger.setDebugLog(values.containsKey("debugLog") && Boolean.parseBoolean(values.get("debugLog")));
+		Reference.fileDirectory = values.containsKey("moduleDir") ? values.get("moduleDir")+"/" : Reference.fileDirectory;
+	}
 
 	public static void addEngine(@NotNull CoreEngine engine)
 	{
@@ -47,6 +63,5 @@ public class Main
 		Thread thread = new Thread(engine::start);
 		engines.add(thread);
 		engines.get(engines.size() - 1).start();
-		engines.get(engines.size()-1).setPriority(Thread.NORM_PRIORITY);
 	}
 }

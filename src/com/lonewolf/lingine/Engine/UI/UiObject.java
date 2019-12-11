@@ -6,7 +6,6 @@ import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
 import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
 import com.lonewolf.lingine.Engine.Rendering.Shader;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiComponent;
-import com.lonewolf.lingine.Logger;
 
 import java.util.ArrayList;
 
@@ -18,7 +17,7 @@ public class UiObject
 	private ArrayList<UiObject> children;
 	private CoreEngine engine;
 	
-	private UIModifier modifer;
+	private UIModifier modifier;
 	
 	private Vector2f pos;
 	private Vector2f scale;
@@ -35,20 +34,20 @@ public class UiObject
 		scale = new Vector2f(1, 1);
 	}
 	
-	public UIModifier getModifer()
+	public UIModifier getModifier()
 	{
-		return modifer;
+		return modifier;
 	}
 	
-	public void setModifer(UIModifier modifer)
+	public void setModifier(UIModifier modifier)
 	{
-		modifer.init(this);
-		this.modifer = modifer;
+		modifier.init(this);
+		this.modifier = modifier;
 	}
 	
 	public void resized(RenderingEngine renderingEngine)
 	{
-		getModifer().resized(renderingEngine.getWindow());
+		getModifier().resized(renderingEngine.getWindow());
 	}
 	
 	public UiObject addComponent(UiComponent component)
@@ -88,7 +87,7 @@ public class UiObject
 		this.engine = engine;
 		components.forEach(component -> component.setEngine(engine));
 		children.forEach(child -> child.setEngine(engine));
-		modifer.resized(engine.getRenderEngine().getWindow());
+		modifier.resized(engine.getRenderEngine().getWindow());
 	}
 	
 	public void setParent(UiObject parent)
@@ -108,12 +107,12 @@ public class UiObject
 	
 	public Vector2f getTransformedScale()
 	{
-		return getParentScale().Mul(new Vector2f(modifer.getWidth(), modifer.getHeight()));
+		return getParentScale().Mul(new Vector2f(modifier.getWidth(), modifier.getHeight()));
 	}
 	
 	public Vector2f getTransformedPos()
 	{
-		return getParentPos().Add(new Vector2f(modifer.getX(), modifer.getY()));
+		return getParentPos().Add(new Vector2f(modifier.getX(), modifier.getY()));
 	}
 	
 	public Vector2f getParentScale()

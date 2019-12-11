@@ -22,8 +22,6 @@ public class CoreEngine
 	{
 		configuration = new Configuration();
 		configuration.loadConfigurationFile(new File("settings"));
-		Logger.setDebugLog(configuration.getConfig("debugLog", false));
-		Main.saveLogs = configuration.getConfig("saveLog", true);
 		Logger.LogD("Engine Start");
 		this.game = game;
 		this.frameSkip = configuration.getConfig("frameSkip", false);
@@ -63,7 +61,7 @@ public class CoreEngine
 		renderEngine.loadAll();
 		game.setEngine(this);
 		game.init();
-		
+		loader.addModules(game);
 		int frames = 0;
 		
 		float frameTime = 1.0f / 60;

@@ -13,6 +13,7 @@ public class WindowScale implements IScalation
 	public WindowScale(float scale)
 	{
 		this.scale = scale;
+		
 		this.width = 1;
 		this.height = 1;
 	}

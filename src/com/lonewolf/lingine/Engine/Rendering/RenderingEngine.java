@@ -8,6 +8,7 @@ import com.lonewolf.lingine.Engine.GameComponents.Camera;
 import com.lonewolf.lingine.Engine.Rendering.resourceManagement.MappedValues;
 import com.lonewolf.lingine.Engine.UI.UiObject;
 import com.lonewolf.lingine.Logger;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.HashMap;

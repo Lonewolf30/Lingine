@@ -283,4 +283,8 @@ public class Window
     {
         return resizedSize;
     }
+    
+    public long getDisplay()
+    {return display;
+    }
 }
