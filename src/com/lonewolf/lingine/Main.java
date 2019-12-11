@@ -2,7 +2,7 @@ package com.lonewolf.lingine;
 
 import com.lonewolf.lingine.Engine.CoreEngine.CoreEngine;
 import com.lonewolf.lingine.Scenes.MainMenu;
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 

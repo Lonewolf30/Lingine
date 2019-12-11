@@ -1,4 +1,4 @@
-#version 150
+#version 130
 
 in vec2 textCoords;
 in vec2 windowAspect;
@@ -11,7 +11,7 @@ out vec4 out_Color;
 void main(void)
 {
     out_Color = texture(img, textCoords);
-    vec2 r = (windowAspect / 2) - radius;
+    vec2 r = (windowAspect / 2.0) - radius;
     vec2 pos = textCoords - 0.5f;
     pos = pos * windowAspect;
 
