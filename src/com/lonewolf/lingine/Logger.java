@@ -58,7 +58,8 @@ public class Logger
 		for (StackTraceElement item : exception.getStackTrace())
 			builder.append(item.toString()).append("\n");
 		logs.add("\u001B[31m[ERROR] " + builder.toString() + "\u001B[0m");
-		instance.saveLogs();
+		if (instance != null)
+			instance.saveLogs();
 		System.exit(1);
 	}
 	

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Lingine.iml" filepath="$PROJECT_DIR$/Lingine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MinecraftTest/MinecraftTest.iml" filepath="$PROJECT_DIR$/MinecraftTest/MinecraftTest.iml" />
     </modules>
   </component>
 </project>

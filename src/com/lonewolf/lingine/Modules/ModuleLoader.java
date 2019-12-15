@@ -54,7 +54,6 @@ public class ModuleLoader
 					if (module.getErros().size() > 1)
 					{
 						module.setEnable(false);
-						Logger.LogI(module.getErros());
 					}
 					modules.put(module.getModuleName(), module);
 				} catch (Exception e)
@@ -63,7 +62,5 @@ public class ModuleLoader
 				}
 			}
 		}
-		
-		Logger.LogI(modules);
 	}
 }

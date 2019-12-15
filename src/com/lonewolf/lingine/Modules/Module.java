@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -29,6 +30,7 @@ public class Module
 		this.module = module;
 		this.path = path;
 		erros = new ArrayList<>();
+		enable = true;
 	}
 	
 	public void loadMainClass()
@@ -51,16 +53,14 @@ public class Module
 				String className = je.getName().substring(0,je.getName().length()-6);
 				className = className.replace('/', '.');
 				Class c = cl.loadClass(className);
-			}
-			
-			mainClass = Class.forName(mainClassName);
-			moduleName = module.getName().substring(module.getName().lastIndexOf("\\")+1,module.getName().length()-4);
-			for (Method meth: mainClass.getDeclaredMethods())
-			{
-				if (meth.getName().equals("moduleLoad"))
+				for (Method meth : c.getDeclaredMethods())
 				{
-					moduleLoadMethod = meth;
-					return;
+					if (meth.getName().equals("moduleLoad"))
+					{
+						baseClass = meth.getDeclaringClass().newInstance();
+						moduleLoadMethod = meth;
+						moduleName = module.getName().substring(module.getName().lastIndexOf("\\")+1, module.getName().length()-4);
+					}
 				}
 			}
 			
@@ -90,7 +90,6 @@ public class Module
 	{
 		try
 		{
-			baseClass = mainClass.newInstance();
 			moduleLoadMethod.invoke(baseClass, game);
 		} catch (Exception e)
 		{

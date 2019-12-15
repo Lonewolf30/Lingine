@@ -33,30 +33,6 @@ public class MainMenu extends Game
 	@Override
 	public void init()
 	{
-		UiObject background = new UiObject();
-		UIModifier modifier = new UIModifier();
-		UIAnimator uianimator = new UIAnimator();
-
-		modifier.setWidth(new WindowScale(0.5f));
-		modifier.setHeight(new AspectScale());
-		modifier.setX(new PercentTranslation(0.5f));
-		modifier.setY(new PercentTranslation(0.5f));
-		
-		background.setModifier(modifier);
-		background.addComponent(new UiButton(new UiColor(128,128,128,255),50,50)
-		{
-			@Override
-			public void run()
-			{
-				engine.stop();
-			}
-			
-			@Override
-			public void setAnimator()
-			{
-				this.animator = uianimator;
-			}
-		});
-		addUiElement(background);
+	
 	}
 }

@@ -88,6 +88,7 @@ public class RenderingEngine extends MappedValues
 		glDisable(GL_DEPTH_TEST);
 		if (resized)
 			uielements.forEach(element -> element.resized(this));
+		
 		gui.SetUniform("windowSize", window.getWindowSize());
 		uielements.forEach(element -> element.render(gui, this));
 		
@@ -95,8 +96,6 @@ public class RenderingEngine extends MappedValues
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_DEPTH_TEST);
 	}
-	
-	
 
 	public static String GetOpenGLVersion()
 	{
