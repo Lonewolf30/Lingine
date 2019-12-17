@@ -7,7 +7,6 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -15,36 +14,30 @@ import java.util.jar.JarFile;
 @SuppressWarnings("ALL")
 public class Module
 {
-	private Class mainClass;
-	private JarFile module;
-	private String path;
-	private String moduleName;
+	private String version;
+	private String name;
+	private String id;
+	
 	private Object baseClass;
 	private Method moduleLoadMethod;
-	private boolean enable;
 	
 	private ArrayList<String> erros;
 	
 	public Module(JarFile module, String path)
 	{
-		this.module = module;
-		this.path = path;
 		erros = new ArrayList<>();
-		enable = true;
+		loadMainClass(module, path);
 	}
 	
-	public void loadMainClass()
+	private void loadMainClass(JarFile module, String path)
 	{
 		try
 		{
-			String mainClassName = module.getManifest().getMainAttributes().getValue("Main-Class");
-			
-			JarFile jarFile = new JarFile(path);
+			JarFile jarFile = module;
 			Enumeration<JarEntry> e = jarFile.entries();
 			
-			URL[] urls = { new URL("jar:file:" + path+"!/") };
+			URL[] urls = { new URL("jar:file:"+path+"!/") };
 			URLClassLoader cl = URLClassLoader.newInstance(urls);
-			
 			while (e.hasMoreElements()) {
 				JarEntry je = e.nextElement();
 				if(je.isDirectory() || !je.getName().endsWith(".class") || je.getName().contains("META")){
@@ -53,37 +46,38 @@ public class Module
 				String className = je.getName().substring(0,je.getName().length()-6);
 				className = className.replace('/', '.');
 				Class c = cl.loadClass(className);
-				for (Method meth : c.getDeclaredMethods())
+				if (c.getAnnotation(Mod.class) != null)
 				{
-					if (meth.getName().equals("moduleLoad"))
+					Mod annotation = (Mod) c.getAnnotation(Mod.class);
+					name = annotation.moduleName();
+					version = annotation.moduleVersion();
+					id = annotation.moduleID();
+					
+					for (Method meth : c.getDeclaredMethods())
 					{
-						baseClass = meth.getDeclaringClass().newInstance();
-						moduleLoadMethod = meth;
-						moduleName = module.getName().substring(module.getName().lastIndexOf("\\")+1, module.getName().length()-4);
+						if (meth.getName().equals("moduleLoad"))
+						{
+							baseClass = meth.getDeclaringClass().newInstance();
+							moduleLoadMethod = meth;
+						}
 					}
+					
+					checkErrors(c);
 				}
 			}
 			
-			erros.add("No moduleLoad method found");
+			if (moduleLoadMethod == null)
+				erros.add("No moduleLoad method found");
 		} catch (Exception e)
 		{
 			Logger.LogE(e);
 		}
 	}
 	
-	public boolean isEnable()
+	private void checkErrors(Class baseClass)
 	{
-		return enable;
-	}
-	
-	public void setEnable(boolean enable)
-	{
-		this.enable = enable;
-	}
-	
-	public String getModuleName()
-	{
-		return moduleName;
+		if (!id.toLowerCase().equals(id))
+			erros.add(name +  ": moduleID needs to be lowercase");
 	}
 	
 	public void loadModule(Game game)
@@ -100,5 +94,20 @@ public class Module
 	public ArrayList<String> getErros()
 	{
 		return erros;
+	}
+	
+	public String getVersion()
+	{
+		return version;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public String getId()
+	{
+		return id;
 	}
 }

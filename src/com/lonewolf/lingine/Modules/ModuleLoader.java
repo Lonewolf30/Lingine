@@ -5,7 +5,6 @@ import com.lonewolf.lingine.Logger;
 import com.lonewolf.lingine.Reference;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.jar.JarFile;
 
@@ -35,8 +34,7 @@ public class ModuleLoader
 	{
 		modules.forEach((s, module) ->
 		{
-			if (module.isEnable())
-				module.loadModule(game);
+			module.loadModule(game);
 		});
 	}
 	
@@ -50,17 +48,21 @@ public class ModuleLoader
 				{
 					JarFile jar = new JarFile(mod);
 					Module module = new Module(jar, mod.getPath());
-					module.loadMainClass();
-					if (module.getErros().size() > 1)
+					if (module.getErros().size() > 0)
 					{
-						module.setEnable(false);
+						Logger.LogE(new ModuleLoadingException(module.getErros().get(0)));
 					}
-					modules.put(module.getModuleName(), module);
+					modules.put(module.getId(), module);
 				} catch (Exception e)
 				{
 					Logger.LogE(e);
 				}
 			}
+		}
+		
+		for (Module mod:modules.values())
+		{
+			Logger.LogI("Loaded: " + mod.getName());
 		}
 	}
 }
