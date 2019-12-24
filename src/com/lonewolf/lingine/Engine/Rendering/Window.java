@@ -61,7 +61,7 @@ public class Window
             displayHeight = (int) dimension.getHeight();
             displayWidth = (int) dimension.getWidth();
         }
-        if (!decorated)
+        if (display != 0 && !decorated)
             glfwSetWindowAttrib(display, GLFW_DECORATED, GLFW_FALSE);
         else
             glfwSetWindowAttrib(display, GLFW_DECORATED, GLFW_TRUE);

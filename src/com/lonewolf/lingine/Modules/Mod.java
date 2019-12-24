@@ -9,4 +9,5 @@ public @interface Mod
 	String moduleID();
 	String moduleVersion();
 	String moduleName();
+	boolean masterModule();
 }

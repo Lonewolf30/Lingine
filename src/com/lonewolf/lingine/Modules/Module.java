@@ -84,7 +84,7 @@ public class Module
 	{
 		try
 		{
-			moduleLoadMethod.invoke(baseClass, game);
+			moduleLoadMethod. invoke(baseClass, game);
 		} catch (Exception e)
 		{
 			Logger.LogE(e);
