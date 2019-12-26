@@ -6,12 +6,14 @@ import com.lonewolf.lingine.Reference;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.jar.JarFile;
 
 @SuppressWarnings("ALL")
 public class ModuleLoader
 {
 	private HashMap<String, Module> modules;
+	private Game game;
 	
 	public ModuleLoader()
 	{
@@ -30,11 +32,36 @@ public class ModuleLoader
 		return directory;
 	}
 	
-	public void addModules(Game game)
+	public void setModules(HashMap<String, Module> modules)
 	{
+		this.modules = modules;
+	}
+	
+	public void setGame(Game game)
+	{
+		this.game = game;
+	}
+	
+	public void addModules()
+	{
+		for (Map.Entry<String, Module> entry : modules.entrySet())
+		{
+			String s = entry.getKey();
+			Module module = entry.getValue();
+			module.loadModule(game);
+		}
+	}
+	
+	private void loadErros()
+	{
+		final boolean[] supermod = {false};
+		
 		modules.forEach((s, module) ->
 		{
-			module.loadModule(game);
+			if (module.isSuperMod() && !supermod[0])
+				supermod[0] = true;
+			else
+				Logger.LogE(new ModuleLoadingException("More Than One Super Module Loaded"));
 		});
 	}
 	
@@ -47,7 +74,9 @@ public class ModuleLoader
 				try
 				{
 					JarFile jar = new JarFile(mod);
-					Module module = new Module(jar, mod.getPath());
+					Module module = new Module();
+					module.setLoader(this);
+					module.load(jar, mod.getPath());
 					if (module.getErros().size() > 0)
 					{
 						Logger.LogE(new ModuleLoadingException(module.getErros().get(0)));
@@ -59,7 +88,7 @@ public class ModuleLoader
 				}
 			}
 		}
-		
+		loadErros();
 		for (Module mod:modules.values())
 		{
 			Logger.LogI("Loaded: " + mod.getName());

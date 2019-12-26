@@ -40,6 +40,13 @@ public class Block extends GameObject
 		
 		mesh = new Mesh(vertices, indices, true);
 		material = new Material(new Texture("test.png"));
+		
+		loadComponents();
+	}
+	
+	public Vector3f getPos()
+	{
+		return pos;
 	}
 	
 	private void loadComponents()

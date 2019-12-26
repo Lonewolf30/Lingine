@@ -12,7 +12,7 @@ public class Material extends MappedValues
 					Texture dispMap, float dispMapScale, float dispMapOffset)
 	{
 		super();
-		m_textureHashMap = new HashMap<String, Texture>();
+		m_textureHashMap = new HashMap<>();
 		AddTexture("diffuse", diffuse);
 		AddFloat("specularIntensity", specularIntensity);
 		AddFloat("specularPower", specularPower);

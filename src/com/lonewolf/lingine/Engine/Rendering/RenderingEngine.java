@@ -144,11 +144,11 @@ public class RenderingEngine extends MappedValues
 	
 	public void loadAll()
 	{
-		window = window.createWidow();
+		window.createWidow();
 		window.createDisplay();
 		
-		m_lights = new ArrayList<BaseLight>();
-		m_samplerMap = new HashMap<String, Integer>();
+		m_lights = new ArrayList<>();
+		m_samplerMap = new HashMap<>();
 		m_samplerMap.put("diffuse", 0);
 		m_samplerMap.put("normalMap", 1);
 		m_samplerMap.put("dispMap", 2);

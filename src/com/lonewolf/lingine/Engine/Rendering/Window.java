@@ -41,7 +41,7 @@ public class Window
     private boolean fullscreen = false;
     private boolean decorated = true;
     
-    public Window createWidow()
+    public void createWidow()
     {
         if(isInit && !glfwInit())
             Logger.LogE(error());
@@ -51,7 +51,7 @@ public class Window
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         
         if (!fullscreen)
-            display = glfwCreateWindow(displayWidth,displayHeight, "Lingine",0,0);
+            display = glfwCreateWindow(displayWidth,displayHeight, "Lingine", 0,0);
         else
         {
             display = glfwCreateWindow(dimension.width, dimension.height, "Lingine", glfwGetPrimaryMonitor(), 0);
@@ -61,12 +61,17 @@ public class Window
             displayHeight = (int) dimension.getHeight();
             displayWidth = (int) dimension.getWidth();
         }
-        if (display != 0 && !decorated)
-            glfwSetWindowAttrib(display, GLFW_DECORATED, GLFW_FALSE);
-        else
-            glfwSetWindowAttrib(display, GLFW_DECORATED, GLFW_TRUE);
         
-        if (display == 0 ) Logger.LogE(error());
+        
+        if (display == 0)
+        {
+    
+            if (!decorated)
+                glfwSetWindowAttrib(display, GLFW_DECORATED, GLFW_FALSE);
+            else
+                glfwSetWindowAttrib(display, GLFW_DECORATED, GLFW_TRUE);
+    
+        }
 
         
         if (!fullscreen)
@@ -87,8 +92,6 @@ public class Window
         });
         
         loadGlCap();
-        
-        return this;
     }
     
     public void setFullscreen()

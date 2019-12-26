@@ -54,7 +54,17 @@ public class Mesh
 		}
 	}
 	
+	private Vertex[] vertices ;
+	private int[] indices;
+	private boolean calcNormals;
 	private void AddVertices(Vertex[] vertices, int[] indices, boolean calcNormals)
+	{
+		this.vertices = vertices;
+		this.indices = indices;
+		this.calcNormals = calcNormals;
+	}
+	
+	private void genBuffer()
 	{
 		if (calcNormals)
 		{
@@ -71,6 +81,9 @@ public class Mesh
 	
 	public void draw()
 	{
+		if (resource == null)
+			genBuffer();
+		
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);

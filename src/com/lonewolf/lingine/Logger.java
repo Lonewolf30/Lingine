@@ -21,7 +21,8 @@ public class Logger
 		public boolean add(@NotNull String log)
 		{
 			String timeStamp = new SimpleDateFormat("[HH:mm:ss] ").format(Calendar.getInstance().getTime());
-			System.out.println("\u001B[36m\u001b[49m" + timeStamp + log);
+			String classCaller = "[" + Thread.currentThread().getStackTrace()[4].getClassName() +"] ";
+			System.out.println("\u001B[36m\u001b[49m" + timeStamp + classCaller + log);
 			return super.add(timeStamp + log);
 		}
 	};

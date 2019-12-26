@@ -27,7 +27,6 @@ public class CoreEngine
 		this.frameSkip = configuration.getConfig("frameSkip", false);
 		isRunning = false;
 		loader = new ModuleLoader();
-		loader.loadModules();
 	}
 	
 	public void start()
@@ -51,17 +50,37 @@ public class CoreEngine
     {
         return configuration;
     }
+    
+    private void loadItems()
+    {
+	    renderEngine = new RenderingEngine();
+	    
+	    game.setRenderingEngine(renderEngine);
+	    game.setWindowAttrib(renderEngine.getWindow());
+	    
+	    renderEngine.loadAll();
+	    
+	    game.setEngine(this);
+	    
+	    game.init();
+	    
+	    
+    }
 	
+    private void loaderInit()
+    {
+	    loader.loadModules();
+	    loader.setGame(game);
+	    
+	    loader.addModules();
+    }
+    
 	private void MainLoop()
 	{
 		Logger.LogD("Main Game Loop Start");
-		renderEngine = new RenderingEngine();
-		game.setRenderingEngine(renderEngine);
-		game.setWindowAttrib(renderEngine.getWindow());
-		renderEngine.loadAll();
-		game.setEngine(this);
-		game.init();
-		loader.addModules(game);
+		loadItems();
+		loaderInit();
+		
 		int frames = 0;
 		
 		float frameTime = 1.0f / 60;
@@ -115,7 +134,7 @@ public class CoreEngine
 		this.game = game;
 //		renderEngine = new RenderingEngine();
 		game.setRenderingEngine(renderEngine);
-		game.setWindowAttrib(renderEngine.getWindow());
+//		game.setWindowAttrib(renderEngine.getWindow());
 //		renderEngine.loadAll();
 		game.setEngine(this);
 		game.init();

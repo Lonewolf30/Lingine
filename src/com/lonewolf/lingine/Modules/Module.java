@@ -17,19 +17,20 @@ public class Module
 	private String version;
 	private String name;
 	private String id;
+	private boolean superMod;
 	
 	private Object baseClass;
 	private Method moduleLoadMethod;
+	private ModuleLoader loader;
 	
 	private ArrayList<String> erros;
 	
-	public Module(JarFile module, String path)
+	public Module()
 	{
 		erros = new ArrayList<>();
-		loadMainClass(module, path);
 	}
 	
-	private void loadMainClass(JarFile module, String path)
+	public void load(JarFile module, String path)
 	{
 		try
 		{
@@ -52,6 +53,7 @@ public class Module
 					name = annotation.moduleName();
 					version = annotation.moduleVersion();
 					id = annotation.moduleID();
+					superMod = annotation.masterModule();
 					
 					for (Method meth : c.getDeclaredMethods())
 					{
@@ -62,9 +64,11 @@ public class Module
 						}
 					}
 					
-					checkErrors(c);
+					
 				}
 			}
+			
+			checkErrors(moduleLoadMethod.getClass());
 			
 			if (moduleLoadMethod == null)
 				erros.add("No moduleLoad method found");
@@ -84,7 +88,7 @@ public class Module
 	{
 		try
 		{
-			moduleLoadMethod. invoke(baseClass, game);
+			moduleLoadMethod.invoke(baseClass, game);
 		} catch (Exception e)
 		{
 			Logger.LogE(e);
@@ -109,5 +113,15 @@ public class Module
 	public String getId()
 	{
 		return id;
+	}
+	
+	public void setLoader(ModuleLoader moduleLoader)
+	{
+		this.loader = moduleLoader;
+	}
+	
+	public boolean isSuperMod()
+	{
+		return superMod;
 	}
 }
