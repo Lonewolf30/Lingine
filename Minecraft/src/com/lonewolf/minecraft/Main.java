@@ -1,13 +1,11 @@
 package com.lonewolf.minecraft;
 
-import com.lonewolf.lingine.Engine.CoreEngine.CoreEngine;
-import com.lonewolf.lingine.Engine.UI.UiColor;
-import com.lonewolf.lingine.Engine.UI.UiComponents.UiBlock;
-import com.lonewolf.lingine.Engine.UI.UiObject;
+import com.lonewolf.lingine.Engine.CoreEngine.Matrix4f;
+import com.lonewolf.lingine.Engine.GameComponents.Camera;
+import com.lonewolf.lingine.Entities.Player;
 import com.lonewolf.lingine.Logger;
 import com.lonewolf.lingine.Modules.Mod;
 import com.lonewolf.lingine.Engine.CoreEngine.Game;
-import com.lonewolf.lingine.Scenes.MainMenu;
 
 @Mod(moduleID = "main", moduleVersion = "v1.0", moduleName = "Module Test", masterModule = true)
 public class Main
@@ -21,6 +19,9 @@ public class Main
 			@Override
 			public void init()
 			{
+				addObject(new Player().addComponent(new Camera(
+						new Matrix4f().InitPerspective(60, engine.getRenderEngine().getWindow().getAspect(),
+								-0.1f,1000))));
 				addObject(new Minecraft());
 			}
 		});

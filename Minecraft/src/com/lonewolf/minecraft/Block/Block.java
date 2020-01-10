@@ -3,10 +3,11 @@ package com.lonewolf.minecraft.Block;
 import com.lonewolf.lingine.Engine.CoreEngine.GameObject;
 import com.lonewolf.lingine.Engine.CoreEngine.Vector3f;
 import com.lonewolf.lingine.Engine.GameComponents.MeshRenderer;
-import com.lonewolf.lingine.Engine.Rendering.Material;
-import com.lonewolf.lingine.Engine.Rendering.Mesh;
-import com.lonewolf.lingine.Engine.Rendering.Texture;
-import com.lonewolf.lingine.Engine.Rendering.Vertex;
+import com.lonewolf.lingine.Engine.Rendering.*;
+import com.lonewolf.lingine.Logger;
+
+import javax.management.remote.SubjectDelegationPermission;
+import java.awt.image.BufferedImage;
 
 public class Block extends GameObject
 {
@@ -20,6 +21,8 @@ public class Block extends GameObject
 	
 	public Block(Vector3f pos, World world)
 	{
+		super();
+		getTransform().SetPos(pos);
 		this.pos = pos;
 		this.world = world;
 		
@@ -35,13 +38,21 @@ public class Block extends GameObject
 		};
 		
 		indices = new int[]{
-			1,2,3
+				0,7,2
 		};
 		
 		mesh = new Mesh(vertices, indices, true);
-		material = new Material(new Texture("test.png"));
+		BufferedImage image = new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB);
+		image.setRGB(0,0,0x00FFFFFF);
+		material = new Material(new Texture(image));
 		
 		loadComponents();
+	}
+	
+	@Override
+	public void Render(Shader shader, RenderingEngine renderEngine)
+	{
+		super.Render(shader, renderEngine);
 	}
 	
 	public Vector3f getPos()

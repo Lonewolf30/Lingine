@@ -1,8 +1,10 @@
 package com.lonewolf.lingine.Modules;
 
+import com.lonewolf.lingine.Engine.CoreEngine.Configuration;
 import com.lonewolf.lingine.Engine.CoreEngine.Game;
 import com.lonewolf.lingine.Logger;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -59,6 +61,7 @@ public class Module
 					{
 						if (meth.getName().equals("moduleLoad"))
 						{
+							//TODO: newInstance dept, repalce with Constuctor new instance
 							baseClass = meth.getDeclaringClass().newInstance();
 							moduleLoadMethod = meth;
 						}

@@ -1,6 +1,8 @@
 package com.lonewolf.minecraft.Block;
 
 import com.lonewolf.lingine.Engine.CoreEngine.Vector3f;
+import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
+import com.lonewolf.lingine.Engine.Rendering.Shader;
 
 public class Chunk
 {
@@ -14,17 +16,24 @@ public class Chunk
 		this.chunkPos = chunkPos;
 		this.world = world;
 		
-		for (int i = 0; i < 16; i++)
-			for (int j = 0; j < 16; j++)
-				for (int k = 0; k < 16; k++)
-				{
-					loadBlock(new Block(chunkPos.Add(new Vector3f(i, j, k)), world));
-				}
+		loadBlock(new Block(new Vector3f(1,0,0).Add(chunkPos), world));
 	}
 	
 	private void loadBlock(Block block)
 	{
 		blocks[(int) (block.getPos().GetX() - chunkPos.GetX())][(int) (block.getPos().GetY() - chunkPos.GetY())][(int) (block.getPos().GetZ() - chunkPos.GetZ())] = block;
+	}
+	
+	public void render(Shader shader, RenderingEngine renderingEngine)
+	{
+		for (int i = 0; i < 16; i++)
+			for (int j = 0; j < 16; j++)
+				for (int k = 0; k < 16; k++)
+				{
+					Block block = blocks[i][j][k];
+					if (block != null)
+						block.Render(shader, renderingEngine);
+				}
 	}
 	
 	public void update()

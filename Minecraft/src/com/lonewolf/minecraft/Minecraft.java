@@ -10,11 +10,7 @@ public class Minecraft extends GameObject
 	public Minecraft()
 	{
 		world = new World();
-	}
-	
-	@Override
-	public void Update(float delta)
-	{
-		world.Update(delta);
+		
+		addComponent(world);
 	}
 }
