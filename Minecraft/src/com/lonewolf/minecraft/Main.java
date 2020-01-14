@@ -19,9 +19,7 @@ public class Main
 			@Override
 			public void init()
 			{
-				addObject(new Player().addComponent(new Camera(
-						new Matrix4f().InitPerspective(60, engine.getRenderEngine().getWindow().getAspect(),
-								-0.1f,1000))));
+				addObject(new Player());
 				addObject(new Minecraft());
 			}
 		});

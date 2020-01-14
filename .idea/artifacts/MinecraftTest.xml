@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="MinecraftTest">
-    <output-path>$PROJECT_DIR$/WorkDir/modules</output-path>
-    <root id="archive" name="MinecraftTest.jar">
-      <element id="module-output" name="Minecraft" />
-    </root>
-  </artifact>
-</component>

@@ -6,6 +6,7 @@ import com.lonewolf.lingine.Engine.GameComponents.Camera;
 import com.lonewolf.lingine.Engine.GameComponents.FreeFlight;
 import com.lonewolf.lingine.Engine.GameComponents.FreeLook;
 import com.lonewolf.lingine.Engine.GameComponents.FreeMove;
+import com.lonewolf.lingine.Logger;
 
 public class Player extends Entity
 {
@@ -24,6 +25,7 @@ public class Player extends Entity
 	public void setEngine(CoreEngine engine)
 	{
 		this.engine = engine;
+		Logger.LogI("Player Init");
 		initObjects();
 		super.setEngine(engine);
 	}
