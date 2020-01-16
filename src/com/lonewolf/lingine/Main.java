@@ -18,6 +18,7 @@ public class Main
 		
 		Logger logger = new Logger();
 		Logger.LogI("Main Program Start");
+		Logger.LogI("Max Memory Allocated: " + Runtime.getRuntime().maxMemory() / 1024 / 1024 / 1024 + " GB");
 
 		Thread thread1 = new Thread(() ->
                 new CoreEngine(new MainMenu()).start());

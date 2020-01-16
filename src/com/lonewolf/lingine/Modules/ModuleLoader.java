@@ -44,12 +44,15 @@ public class ModuleLoader
 	
 	public void addModules()
 	{
+		Logger.LogI("Module Execution Started");
 		for (Map.Entry<String, Module> entry : modules.entrySet())
 		{
 			String s = entry.getKey();
 			Module module = entry.getValue();
+			Logger.LogI("Executing: " + module.getName());
 			module.loadModule(game);
 		}
+		Logger.LogI("Module Execution Finished");
 	}
 	
 	private void loadErros()
@@ -93,5 +96,7 @@ public class ModuleLoader
 		{
 			Logger.LogI("Loaded: " + mod.getName());
 		}
+		
+		Logger.LogI("Module Loading Complete");
 	}
 }
