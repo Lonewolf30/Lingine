@@ -80,11 +80,11 @@ public class Logger
 			for (char letter : oldLog.toCharArray())
 			{
 				log
-						.append("\u001B[4")
-						.append(color.nextInt(8))
-						.append("m")
+//						.append("\u001B[4")
+//						.append(color.nextInt(8))
+//						.append("m")
 						.append("\u001B[3")
-						.append(color.nextInt(8))
+						.append(4)
 						.append("m")
 						.append(letter)
 //						.append("\u001B[47")

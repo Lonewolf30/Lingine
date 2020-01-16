@@ -55,7 +55,7 @@ public class RenderingEngine extends MappedValues
 	{
 		window.loadGlCap();
 		
-		if (GetMainCamera() == null)
+		if (object.size() > 0 && GetMainCamera() == null)
 			Logger.LogD("Error! Main camera not found. This is very very big bug, and game will crash.");
 		else
 		{
@@ -86,6 +86,8 @@ public class RenderingEngine extends MappedValues
 		window.loadGlCap();
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
 		if (resized)
 			uielements.forEach(element -> element.resized(this));
 		
@@ -95,6 +97,7 @@ public class RenderingEngine extends MappedValues
 		resized = false;
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
 	}
 
 	public static String GetOpenGLVersion()
@@ -160,9 +163,9 @@ public class RenderingEngine extends MappedValues
 		
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		
-//		glFrontFace(GL_CW);
-//		glCullFace(GL_BACK);
-//		glEnable(GL_CULL_FACE);
+		glFrontFace(GL_CW);
+		glCullFace(GL_BACK);
+		glEnable(GL_CULL_FACE);
 		glEnable(GL_DEPTH_TEST);
 		
 		glEnable(GL_BLEND);

@@ -31,7 +31,7 @@ public class Window
 {
     private long display;
     private Input input;
-    private int displayWidth = 800;
+    private int displayWidth = 1000;
     private int displayHeight = 600;
     private RenderingEngine renderEngine;
     private Vector2f resizedSize;

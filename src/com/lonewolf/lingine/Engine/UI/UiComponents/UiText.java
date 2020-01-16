@@ -5,6 +5,7 @@ import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
 import com.lonewolf.lingine.Engine.Rendering.Shader;
 import com.lonewolf.lingine.Engine.Rendering.Texture;
 import com.lonewolf.lingine.Engine.UI.UiColor;
+import com.lonewolf.lingine.Logger;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -43,7 +44,6 @@ public class UiText extends UiBlock
 		Graphics2D g = newImage.createGraphics();
 		g.drawImage(img, 0, 0, null);
 		g.dispose();
-		
 		return newImage;
 	}
 	
@@ -56,7 +56,7 @@ public class UiText extends UiBlock
 	public void render(Shader shader, RenderingEngine renderEngine)
 	{
 		Vector2f location = parent.getTransformedPos();
-		Vector2f scale = parent.getTransformedScale();
+		Vector2f scale = parent.getTransformedScale().Div(renderEngine.getWindow().getWindowSize());
 		
 		shader.SetUniform("scale", new Vector2f(scale.GetX(), -scale.GetY()));
 		shader.SetUniform("offset", location.Sub(renderEngine.getWindow().getWindowSize().Div(2)).Div(renderEngine.getWindow().getWindowSize().Div(2)));
@@ -65,7 +65,7 @@ public class UiText extends UiBlock
 		if (texture != null)
 			texture.Bind();
 		else
-			generateTexture(scale.Mul(renderEngine.getWindow().getWindowSize()));
+			generateTexture(parent.getTransformedScale());
 		
 		shader.Bind();
 		

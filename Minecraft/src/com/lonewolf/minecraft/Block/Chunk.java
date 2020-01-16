@@ -26,9 +26,9 @@ public class Chunk
 	
 	public void render(Shader shader, RenderingEngine renderingEngine)
 	{
-		for (int i = 0; i < 16; i++)
-			for (int j = 0; j < 16; j++)
-				for (int k = 0; k < 16; k++)
+		for (int i = 0; i < blocks.length; i++)
+			for (int j = 0; j < blocks[i].length; j++)
+				for (int k = 0; k < blocks[i][j].length; k++)
 				{
 					Block block = blocks[i][j][k];
 					if (block != null)

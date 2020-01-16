@@ -34,9 +34,9 @@ public class Player extends Entity
 	{
 		addComponent(new FreeMove(5));
 		addComponent(new FreeLook(0.5f));
-		addComponent(new Camera(new Matrix4f().InitPerspective((float) Math.toRadians(60),
+		addComponent(new Camera(new Matrix4f().InitPerspective((float) Math.toRadians(70),
 				getEngine().getRenderEngine().getWindow().getAspect(),
-				0.01f, 1000)));
+				0.01f, 100)));
 		addComponent(new FreeFlight(10));
 	}
 }

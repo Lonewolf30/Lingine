@@ -49,12 +49,6 @@ public class Block extends GameObject
 		loadComponents();
 	}
 	
-	@Override
-	public void Render(Shader shader, RenderingEngine renderEngine)
-	{
-		super.Render(shader, renderEngine);
-	}
-	
 	public Vector3f getPos()
 	{
 		return pos;

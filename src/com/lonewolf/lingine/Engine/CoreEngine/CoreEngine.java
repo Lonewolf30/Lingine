@@ -10,7 +10,6 @@ import java.io.File;
 public class CoreEngine
 {
 	private Game game;
-	private ModuleLoader loader;
 	private Configuration configuration;
 	private RenderingEngine renderEngine;
 	private float delta;
@@ -26,7 +25,6 @@ public class CoreEngine
 		this.game = game;
 		this.frameSkip = configuration.getConfig("frameSkip", false);
 		isRunning = false;
-		loader = new ModuleLoader();
 	}
 	
 	public void start()
@@ -63,23 +61,12 @@ public class CoreEngine
 	    game.setEngine(this);
 	    
 	    game.init();
-	    
-	    
-    }
-	
-    private void loaderInit()
-    {
-	    loader.loadModules();
-	    loader.setGame(game);
-	    
-	    loader.addModules();
     }
     
 	private void MainLoop()
 	{
 		Logger.LogD("Main Game Loop Start");
 		loadItems();
-		loaderInit();
 		
 		int frames = 0;
 		
@@ -132,10 +119,8 @@ public class CoreEngine
 	public void loadGame(Game game)
 	{
 		this.game = game;
-//		renderEngine = new RenderingEngine();
 		game.setRenderingEngine(renderEngine);
-//		game.setWindowAttrib(renderEngine.getWindow());
-//		renderEngine.loadAll();
+		game.setWindowAttrib(renderEngine.getWindow());
 		game.setEngine(this);
 		game.init();
 	}
