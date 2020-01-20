@@ -27,10 +27,10 @@ public class MainMenu extends Game
 	public void init()
 	{
 		loadBackground();
-		
+
 		settingsButton();
 		exitButton();
-		
+
 		loadNameText();
 		loadMainDispLogo();
 		loadTermOfUse();
@@ -46,7 +46,7 @@ public class MainMenu extends Game
 			@Override
 			public void run()
 			{
-				Logger.LogI("Exit Button");
+				engine.stop();
 			}
 		});
 		

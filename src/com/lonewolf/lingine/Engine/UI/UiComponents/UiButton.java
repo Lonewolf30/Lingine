@@ -16,15 +16,6 @@ public abstract class UiButton extends UiBlock
 		super(color, cornerRadius);
 		inced = false;
 		this.colorShift = colorShift;
-		setAnimator();
-	}
-	
-	public void animation()
-	{
-	}
-	
-	public void reverseAnimation()
-	{
 	}
 	
 	public abstract void run();
@@ -36,6 +27,10 @@ public abstract class UiButton extends UiBlock
 		Vector2f scale = parent.getTransformedScale();
 		Vector2f location = parent.getTransformedPos();
 		
+		if (inced)
+			if (input.GetMouseDown(0))
+				run();
+		
 		if (location.GetX() - scale.GetX() / 2 < mousePos.GetX() && mousePos.GetX() < location.GetX() + scale.GetX() / 2)
 		{
 			if (location.GetY() - scale.GetY() / 2 < mousePos.GetY() && mousePos.GetY() < location.GetY() + scale.GetY() / 2)
@@ -44,13 +39,7 @@ public abstract class UiButton extends UiBlock
 				{
 					color.inc(-(int) colorShift);
 					generateTexture();
-					animation();
 					inced = true;
-				}
-				
-				if (input.GetMouseDown(0))
-				{
-					run();
 				}
 				
 				return;
@@ -61,15 +50,7 @@ public abstract class UiButton extends UiBlock
 		{
 			color.inc((int) colorShift);
 			generateTexture();
-			reverseAnimation();
 			inced = false;
 		}
-		
-		
-	}
-	
-	public void setAnimator()
-	{
-//		this.animator = animator;
 	}
 }

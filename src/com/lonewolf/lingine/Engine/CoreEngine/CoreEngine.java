@@ -15,7 +15,6 @@ public class CoreEngine
 	private float delta;
 	
 	private boolean isRunning;
-	private boolean frameSkip;
 	
 	public CoreEngine(Game game)
 	{
@@ -23,7 +22,6 @@ public class CoreEngine
 		configuration.loadConfigurationFile(new File("settings"));
 		Logger.LogD("Engine Start");
 		this.game = game;
-		this.frameSkip = configuration.getConfig("frameSkip", false);
 		isRunning = false;
 	}
 	
@@ -70,7 +68,7 @@ public class CoreEngine
 		
 		int frames = 0;
 		
-		float frameTime = 1.0f / 60;
+		float renderTime = 1.0f / 60f;
 		float passedTime = 0;
 		float processedTime = 0;
 		
@@ -84,12 +82,9 @@ public class CoreEngine
 			processedTime += usedTime;
 			passedTime += usedTime;
 			
-			if (processedTime > frameTime)
+			while (processedTime >= renderTime)
 			{
-				processedTime -= frameTime;
-				
-				if (frameSkip && processedTime > frameTime *3)
-					processedTime -= frameTime*3;
+				processedTime = processedTime - renderTime;
 				
 				if (renderEngine.getWindow().isClosedRequested())
 					stop();
@@ -99,9 +94,8 @@ public class CoreEngine
 				update();
 				frames++;
 				
-				if (passedTime > 1)
+				if (passedTime >= 1)
 				{
-					Logger.LogD(String.valueOf(frames));
 					passedTime = 0;
 					frames = 0;
 				}
