@@ -110,9 +110,10 @@ public class CoreEngine
 		return game;
 	}
 	
-	public void loadGame(Game game)
+	public void loadGame(Game game, Game prev)
 	{
 		this.game = game;
+		game.setPrevGame(prev);
 		game.setRenderingEngine(renderEngine);
 		game.setWindowAttrib(renderEngine.getWindow());
 		game.setEngine(this);

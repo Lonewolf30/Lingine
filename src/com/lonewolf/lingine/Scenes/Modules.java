@@ -27,7 +27,7 @@ public class Modules extends Game
 					@Override
 					public void run()
 					{
-						engine.loadGame(new MainMenu());
+						engine.loadGame(getPrevGame(), null);
 					}
 				});
 		

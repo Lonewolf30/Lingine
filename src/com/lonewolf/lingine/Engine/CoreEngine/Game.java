@@ -13,11 +13,22 @@ public abstract class Game
 	private ArrayList<GameObject> objects;
 	private ArrayList<UiObject> uielements;
 	public CoreEngine engine;
+	private Game prevGame;
 	
 	public Game()
 	{
 		objects = new ArrayList<>();
 		uielements = new ArrayList<>();
+	}
+	
+	public Game getPrevGame()
+	{
+		return prevGame;
+	}
+	
+	public void setPrevGame(Game prevGame)
+	{
+		this.prevGame = prevGame;
 	}
 	
 	public abstract void init();

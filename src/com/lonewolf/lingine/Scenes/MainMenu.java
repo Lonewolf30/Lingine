@@ -17,23 +17,110 @@ import com.lonewolf.lingine.Logger;
 
 public class MainMenu extends Game
 {
+	private Game instance;
+	
+	public MainMenu()
+	{
+		instance = this;
+	}
+	
+	
 	@Override
 	public void setWindowAttrib(Window window)
 	{
-	
+		window.setFloatingPane();
+//		window.setFullscreen();
 	}
 	
 	@Override
 	public void init()
 	{
 		loadBackground();
-
+		
+		newGameButton();
+		loadGameButton();
+		modulesButton();
 		settingsButton();
 		exitButton();
 
 		loadNameText();
 		loadMainDispLogo();
 		loadTermOfUse();
+	}
+	
+	private void loadGameButton()
+	{
+		UiObject background = new UiObject();
+		UIModifier modifier = new UIModifier();
+		
+		background.addComponent(new UiButton(new UiColor(39, 204, 32,255),4,25)
+		{
+			@Override
+			public void run()
+			{
+			
+			}
+		});
+		
+		background.addComponent(new UiText(new UiColor(255,255,255,255), "Load Game", false));
+		
+		modifier.setX(new PercentTranslation(0.75f));
+		modifier.setY(new PercentTranslation(0.4375f));
+		modifier.setWidth(new WindowScale(0.3125f));
+		modifier.setHeight(new WindowScale(0.075f));
+		background.setModifier(modifier);
+		
+		addUiElement(background);
+	}
+	
+	private void newGameButton()
+	{
+		UiObject background = new UiObject();
+		UIModifier modifier = new UIModifier();
+		
+		background.addComponent(new UiButton(new UiColor(39, 204, 32,255),4,25)
+		{
+			@Override
+			public void run()
+			{
+			
+			}
+		});
+		
+		background.addComponent(new UiText(new UiColor(255,255,255,255), "New Game", false));
+		
+		modifier.setX(new PercentTranslation(0.75f));
+		modifier.setY(new PercentTranslation(0.5375f));
+		modifier.setWidth(new WindowScale(0.3125f));
+		modifier.setHeight(new WindowScale(0.075f));
+		background.setModifier(modifier);
+		
+		addUiElement(background);
+	}
+	
+	private void modulesButton()
+	{
+		UiObject background = new UiObject();
+		UIModifier modifier = new UIModifier();
+		
+		background.addComponent(new UiButton(new UiColor(39, 204, 32,255),4,25)
+		{
+			@Override
+			public void run()
+			{
+			
+			}
+		});
+		
+		background.addComponent(new UiText(new UiColor(255,255,255,255), "Modules", false));
+		
+		modifier.setX(new PercentTranslation(0.75f));
+		modifier.setY(new PercentTranslation(0.3375f));
+		modifier.setWidth(new WindowScale(0.3125f));
+		modifier.setHeight(new WindowScale(0.075f));
+		background.setModifier(modifier);
+		
+		addUiElement(background);
 	}
 	
 	private void exitButton()
@@ -71,7 +158,7 @@ public class MainMenu extends Game
 			@Override
 			public void run()
 			{
-				Logger.LogI("Setting Button");
+				engine.loadGame(new Settings(), instance);
 			}
 		});
 		
@@ -91,12 +178,12 @@ public class MainMenu extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiImage("tos.png",0));
+		background.addComponent(new UiText(new UiColor(255,255,255,255), "Terms Of Use", false));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(1-0.971f));
-		modifier.setWidth(new WindowScale(0.128f));
-		modifier.setHeight(new WindowScale(0.018f));
+		modifier.setWidth(new WindowScale(1));
+		modifier.setHeight(new WindowScale(0.03f));
 		background.setModifier(modifier);
 		
 		addUiElement(background);

@@ -1,9 +1,11 @@
 package com.lonewolf.lingine.Engine.UI.UITranslation;
 
 import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
+import com.lonewolf.lingine.Engine.UI.UiObject;
 
 public class PercentTranslation implements ITranslation
 {
+	private UiObject parent;
 	private float amount;
 	private int x;
 	private int y;
@@ -13,6 +15,12 @@ public class PercentTranslation implements ITranslation
 		this.amount = amount;
 		x = 0;
 		y = 0;
+	}
+	
+	@Override
+	public void setParent(UiObject parent)
+	{
+		this.parent = parent;
 	}
 	
 	@Override

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\Younglings\Desktop\Lingine\Lingine.jar</jar>
+  <outfile>C:\Users\Younglings\Desktop\Lingine\dist\Lingine.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\Younglings\Desktop\Lingine\logo.ico</icon>
+  <singleInstance>
+    <mutexName>Lingine Game Engine</mutexName>
+    <windowTitle>Lingine Game Engine</windowTitle>
+  </singleInstance>
+  <classPath>
+    <mainClass>com.lonewolf.lingine.Main</mainClass>
+    <cp>res/*</cp>
+  </classPath>
+  <jre>
+    <path>dist\jre\bin\javaw.exe</path>
+    <bundledJre64Bit>true</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.8.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>jdkOnly</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+    <opt>-Dlaunch4j.exedir=&quot;%EXEDIR%&quot;</opt>
+    <opt>-Dlaunch4j.exefile=&quot;%EXEFILE%&quot;</opt>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>v1.0.0</txtFileVersion>
+    <fileDescription>Lingine Game Engine</fileDescription>
+    <copyright>Lonewolf Development Studio</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>v1.0.0</txtProductVersion>
+    <productName>Lingine Game Engine</productName>
+    <companyName>Lonewolf Development Studio</companyName>
+    <internalName>Lingine</internalName>
+    <originalFilename>Lingine.exe</originalFilename>
+    <trademarks>Lingine Game Engine</trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
+</launch4jConfig>

@@ -11,7 +11,10 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.stb.STBImage;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -19,9 +22,8 @@ import java.nio.IntBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.nio.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryUtil.memAllocInt;
@@ -51,21 +53,20 @@ public class Window
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         
         if (!fullscreen)
-            display = glfwCreateWindow(displayWidth,displayHeight, "Lingine", 0,0);
+        {
+            display = glfwCreateWindow(displayWidth, displayHeight, "Lingine", 0, 0);
+        }
         else
         {
             display = glfwCreateWindow(dimension.width, dimension.height, "Lingine", glfwGetPrimaryMonitor(), 0);
-            if (decorated)
-                glfwSetWindowAttrib(display, GLFW_DECORATED, GLFW_FALSE);
             glfwMaximizeWindow(display);
             displayHeight = (int) dimension.getHeight();
             displayWidth = (int) dimension.getWidth();
         }
         
         
-        if (display == 0)
+        if (display != 0)
         {
-    
             if (!decorated)
                 glfwSetWindowAttrib(display, GLFW_DECORATED, GLFW_FALSE);
             else
@@ -164,7 +165,7 @@ public class Window
         } else {
             try (
                     InputStream source = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
-                    ReadableByteChannel rbc = Channels.newChannel(source)
+                    ReadableByteChannel rbc = Channels.newChannel(source);
             ) {
                 buffer = BufferUtils.createByteBuffer(bufferSize);
                 

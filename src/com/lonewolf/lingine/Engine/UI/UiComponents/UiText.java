@@ -33,7 +33,7 @@ public class UiText extends UiBlock
 		BufferedImage img = new BufferedImage((int)size.GetX() , (int)size.GetY(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = img.createGraphics();
 		g2d.setPaint(color.getColor());
-		g2d.setFont(new Font("Tahoma", Font.PLAIN, (int)(img.getHeight() * 0.5f)));
+		g2d.setFont(new Font("Source Sans Pro", Font.BOLD, (int)(img.getHeight() * 0.5f)));
 		FontMetrics fm = g2d.getFontMetrics();
 		int x = (img.getWidth() - fm.stringWidth(text))/2;
 		int y = fm.getHeight() + fm.getHeight()/100000;

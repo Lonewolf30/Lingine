@@ -1,39 +1,106 @@
 package com.lonewolf.lingine.Scenes;
 
 import com.lonewolf.lingine.Engine.CoreEngine.Game;
-import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
+import com.lonewolf.lingine.Engine.Rendering.Window;
+import com.lonewolf.lingine.Engine.UI.UIModifier;
+import com.lonewolf.lingine.Engine.UI.UIScalation.AspectScale;
+import com.lonewolf.lingine.Engine.UI.UIScalation.WindowScale;
+import com.lonewolf.lingine.Engine.UI.UITranslation.PercentTranslation;
 import com.lonewolf.lingine.Engine.UI.UiColor;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiBlock;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiButton;
+import com.lonewolf.lingine.Engine.UI.UiComponents.UiSlider.UiSlider;
+import com.lonewolf.lingine.Engine.UI.UiComponents.UiSlider.UiSliderRecp;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiText;
 import com.lonewolf.lingine.Engine.UI.UiObject;
 
 public class Settings extends Game
 {
+	/*
+	Language
+	Theme
+	Fullscreen
+	Floating window
+	 */
+	
+	@Override
+	public void setWindowAttrib(Window window)
+	{
+		window.setFloatingPane();
+	}
+	
 	@Override
 	public void init()
 	{
-		addUiElement(new UiObject().addComponent(new UiBlock(new UiColor(128,128,128,255), 0)));
-		
-		addUiElement(loadMainMenuButton());
+		loadBackground();
+
+		loadUiSliderTest();
+		loadMainMenuButton();
 	}
 	
-	private UiObject loadMainMenuButton()
+	private void loadUiSliderTest()
 	{
-		UiObject object = new UiObject();
-		object.addComponent(new UiButton(new UiColor(100,100,100,255), 30, 25)
+		loadSliderRec();
+	}
+	
+	private UiObject loadSliderRec()
+	{
+		UiObject background = new UiObject();
+		UIModifier modifier = new UIModifier();
+		
+		background.addComponent(new UiSliderRecp(
+				new UiColor(255,0,255,255),
+				new UiColor(255,0,255,255)));
+		
+		modifier.setX(new PercentTranslation(0.5f));
+		modifier.setY(new PercentTranslation(0.5f));
+		modifier.setWidth(new WindowScale(0.25f));
+		modifier.setHeight(new WindowScale(0.15f));
+		background.setModifier(modifier);
+		addUiElement(background);
+		
+		return background;
+	}
+	
+	
+	private void loadMainMenuButton()
+	{
+		UiObject background = new UiObject();
+		UIModifier modifier = new UIModifier();
+		
+		background.addComponent(new UiButton(new UiColor(67, 66, 93,255),4,10)
 		{
 			@Override
 			public void run()
 			{
-				engine.loadGame(new MainMenu());
+				engine.loadGame(getPrevGame(), null);
 			}
 		});
 		
-		object.setScale(new Vector2f(0.25f, 0.1f));
-		object.setPos(new Vector2f(150, 75));
-		object.addComponent(new UiText(new UiColor(0,0,0,255),"MainMenu", false));
+		background.addComponent(new UiText(new UiColor(255,255,255,175),"Return",false));
 		
-		return object;
+		modifier.setX(new PercentTranslation(0.85f));
+		modifier.setY(new PercentTranslation(0.08f));
+		modifier.setWidth(new WindowScale(0.115f));
+		modifier.setHeight(new WindowScale(0.063f));
+		background.setModifier(modifier);
+		
+		addUiElement(background);
+	}
+	
+	private void loadBackground()
+	{
+		UiObject background = new UiObject();
+		UIModifier modifier = new UIModifier();
+		
+		background.addComponent(new UiBlock(new UiColor(50,50,50,255), 0));
+		
+		modifier.setX(new PercentTranslation(0.5f));
+		modifier.setY(new PercentTranslation(0.5f));
+		modifier.setWidth(new WindowScale(1));
+		modifier.setHeight(new AspectScale());
+		background.setModifier(modifier);
+		
+		addUiElement(background);
 	}
 }

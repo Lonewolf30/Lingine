@@ -1,6 +1,5 @@
 package com.lonewolf.lingine.Engine.UI.UiComponents;
 
-import com.lonewolf.lingine.Engine.CoreEngine.Input;
 import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
 import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
 import com.lonewolf.lingine.Engine.Rendering.Shader;
@@ -29,12 +28,6 @@ public class UiBlock extends UiComponent
 		BufferedImage image = new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB);
 		image.setRGB(0,0,color.getColor().getRGB());
 		texture = new Texture(image);
-	}
-	
-	@Override
-	public void input(Input input)
-	{
-		super.input(input);
 	}
 	
 	@Override

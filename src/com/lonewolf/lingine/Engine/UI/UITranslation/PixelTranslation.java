@@ -1,6 +1,7 @@
 package com.lonewolf.lingine.Engine.UI.UITranslation;
 
 import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
+import com.lonewolf.lingine.Engine.UI.UiObject;
 
 public class PixelTranslation implements ITranslation
 {
@@ -9,6 +10,12 @@ public class PixelTranslation implements ITranslation
 	public PixelTranslation(int offset)
 	{
 		this.offset = offset;
+	}
+	
+	@Override
+	public void setParent(UiObject parent)
+	{
+	
 	}
 	
 	@Override
