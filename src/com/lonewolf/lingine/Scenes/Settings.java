@@ -49,8 +49,8 @@ public class Settings extends Game
 		UIModifier modifier = new UIModifier();
 		
 		background.addComponent(new UiSliderRecp(
-				new UiColor(255,0,255,255),
-				new UiColor(255,0,255,255)));
+				new UiColor(0,0,255,255),
+				new UiColor(255,0,0,255)));
 		
 		modifier.setX(new PercentTranslation(0.5f));
 		modifier.setY(new PercentTranslation(0.5f));
