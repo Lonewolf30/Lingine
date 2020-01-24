@@ -58,11 +58,11 @@ public class Logger
 		builder.append(exception.toString()).append("\n");
 		for (StackTraceElement item : exception.getStackTrace())
 			builder.append(item.toString()).append("\n");
-		logs.add("\u001B[31m[ERROR] " + builder.toString() + "\u001B[0m");
+		logs.add("\u001B[31m[ERROR] " + exception.getCause() + "\n" +builder.toString() + "\u001B[0m");
 		if (instance != null)
 			instance.saveLogs();
 		System.exit(1);
-	}
+}
 	
 	private static Random color = new Random();
 	

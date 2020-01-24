@@ -5,6 +5,7 @@ import com.lonewolf.lingine.Logger;
 import com.lonewolf.lingine.Reference;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.JarFile;
@@ -98,5 +99,10 @@ public class ModuleLoader
 		}
 		
 		Logger.LogI("Module Loading Complete");
+	}
+	
+	public Collection<Module> getModules()
+	{
+		return modules.values();
 	}
 }

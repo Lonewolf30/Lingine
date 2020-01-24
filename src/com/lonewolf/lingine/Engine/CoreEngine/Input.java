@@ -6,7 +6,7 @@ import static  org.lwjgl.glfw.GLFW.*;
 
 public class Input
 {
-	public static final int NUM_KEYCODES = 256;
+	public static final int NUM_KEYCODES = 512;
 	public static final int NUM_MOUSEBUTTONS = 5;
 
 	public static final int KEY_ESCAPE          = GLFW_KEY_ESCAPE;

@@ -20,12 +20,17 @@ public abstract class UiButton extends UiBlock
 	
 	public abstract void run();
 	
+	public abstract int keyBind();
+	
 	@Override
 	public void input(Input input)
 	{
 		Vector2f mousePos = input.GetMousePosition();
 		Vector2f scale = parent.getTransformedScale();
 		Vector2f location = parent.getTransformedPos();
+		
+		if (input.GetKeyDown(keyBind()))
+			run();
 		
 		if (inced)
 			if (input.GetMouseDown(0))

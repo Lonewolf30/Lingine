@@ -50,6 +50,7 @@ public class UiText extends UiBlock
 	protected void generateTexture(Vector2f windowSize)
 	{
 		texture = new Texture(getImage(windowSize));
+		texture.Bind();
 	}
 	
 	@Override

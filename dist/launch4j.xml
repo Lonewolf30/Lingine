@@ -25,7 +25,7 @@
   <jre>
     <path>dist\jre\bin\javaw.exe</path>
     <bundledJre64Bit>true</bundledJre64Bit>
-    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <bundledJreAsFallback>true</bundledJreAsFallback>
     <minVersion>1.8.0</minVersion>
     <maxVersion></maxVersion>
     <jdkPreference>jdkOnly</jdkPreference>

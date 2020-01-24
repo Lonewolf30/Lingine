@@ -28,6 +28,7 @@ public class UiBlock extends UiComponent
 		BufferedImage image = new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB);
 		image.setRGB(0,0,color.getColor().getRGB());
 		texture = new Texture(image);
+		texture.Bind();
 	}
 	
 	@Override

@@ -27,6 +27,7 @@ public class UiImage extends UiComponent
 	protected void generateTexture()
 	{
 		texture = new Texture(imageName);
+		texture.Bind();
 	}
 	
 	@Override

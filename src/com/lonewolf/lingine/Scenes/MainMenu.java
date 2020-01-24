@@ -1,6 +1,7 @@
 package com.lonewolf.lingine.Scenes;
 
 import com.lonewolf.lingine.Engine.CoreEngine.Game;
+import com.lonewolf.lingine.Engine.CoreEngine.Input;
 import com.lonewolf.lingine.Engine.Rendering.Window;
 import com.lonewolf.lingine.Engine.UI.UIModifier;
 import com.lonewolf.lingine.Engine.UI.UIScalation.AspectScale;
@@ -14,22 +15,28 @@ import com.lonewolf.lingine.Engine.UI.UiComponents.UiImage;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiText;
 import com.lonewolf.lingine.Engine.UI.UiObject;
 import com.lonewolf.lingine.Logger;
+import com.lonewolf.lingine.Modules.ModuleLoader;
 
 public class MainMenu extends Game
 {
 	private Game instance;
+	private ModuleLoader loader;
 	
 	public MainMenu()
 	{
 		instance = this;
+		loader = new ModuleLoader();
+		loader.loadModules();
 	}
 	
+	public ModuleLoader getLoader()
+	{
+		return loader;
+	}
 	
 	@Override
 	public void setWindowAttrib(Window window)
 	{
-		window.setFloatingPane();
-//		window.setFullscreen();
 	}
 	
 	@Override
@@ -60,6 +67,12 @@ public class MainMenu extends Game
 			{
 			
 			}
+			
+			@Override
+			public int keyBind()
+			{
+				return Input.KEY_L;
+			}
 		});
 		
 		background.addComponent(new UiText(new UiColor(255,255,255,255), "Load Game", false));
@@ -83,7 +96,14 @@ public class MainMenu extends Game
 			@Override
 			public void run()
 			{
+				loader.setGame(instance);
+				loader.addModules();
+			}
 			
+			@Override
+			public int keyBind()
+			{
+				return Input.KEY_N;
 			}
 		});
 		
@@ -108,7 +128,13 @@ public class MainMenu extends Game
 			@Override
 			public void run()
 			{
+				engine.loadGame(new Modules(), instance);
+			}
 			
+			@Override
+			public int keyBind()
+			{
+				return Input.KEY_M;
 			}
 		});
 		
@@ -135,6 +161,12 @@ public class MainMenu extends Game
 			{
 				engine.stop();
 			}
+			
+			@Override
+			public int keyBind()
+			{
+				return Input.KEY_END;
+			}
 		});
 		
 		background.addComponent(new UiText(new UiColor(255,255,255,175), "Exit", false));
@@ -159,6 +191,12 @@ public class MainMenu extends Game
 			public void run()
 			{
 				engine.loadGame(new Settings(), instance);
+			}
+			
+			@Override
+			public int keyBind()
+			{
+				return 0;
 			}
 		});
 		
