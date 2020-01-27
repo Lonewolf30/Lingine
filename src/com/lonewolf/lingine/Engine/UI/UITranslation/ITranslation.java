@@ -1,7 +1,7 @@
 package com.lonewolf.lingine.Engine.UI.UITranslation;
 
-import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
 import com.lonewolf.lingine.Engine.UI.UiObject;
+import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
 
 public interface ITranslation
 {

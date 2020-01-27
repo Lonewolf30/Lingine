@@ -7,7 +7,6 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings({"ALL"})
 public class Configuration
 {
 	private HashMap<String, String> configs;
@@ -78,6 +77,11 @@ public class Configuration
 			configs.put(configName, defaultValue);
 			return defaultValue;
 		}
+	}
+	
+	public void setConfigValue(String id, String value)
+	{
+		configs.replace(id, value);
 	}
 	
 	public int getConfig(String configName, int defaultValue)

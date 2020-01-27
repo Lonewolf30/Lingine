@@ -1,8 +1,8 @@
 package com.lonewolf.lingine.Engine.GameComponents;
 
-import com.lonewolf.lingine.Engine.CoreEngine.Vector3f;
 import com.lonewolf.lingine.Engine.Rendering.Attenuation;
 import com.lonewolf.lingine.Engine.Rendering.Shader;
+import com.lonewolf.lingine.Engine.CoreEngine.Vector3f;
 
 public class SpotLight extends PointLight
 {

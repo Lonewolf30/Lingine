@@ -6,12 +6,14 @@ import com.lonewolf.lingine.Engine.GameComponents.DirectionalLight;
 import com.lonewolf.lingine.Engine.GameComponents.PointLight;
 import com.lonewolf.lingine.Engine.GameComponents.SpotLight;
 import com.lonewolf.lingine.Engine.Rendering.resourceManagement.ShaderResource;
+import jdk.nashorn.api.scripting.URLReader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static java.lang.ClassLoader.getSystemResource;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
 
@@ -357,7 +359,7 @@ public class Shader
         
         try
         {
-            shaderReader = new BufferedReader(new FileReader("./res/shader/" + fileName));
+            shaderReader = new BufferedReader(new URLReader(ClassLoader.getSystemResource("shader/" + fileName)));
             String line;
             
             while((line = shaderReader.readLine()) != null)

@@ -1,7 +1,5 @@
 package com.lonewolf.lingine.Scenes;
 
-import com.lonewolf.lingine.Engine.CoreEngine.Game;
-import com.lonewolf.lingine.Engine.CoreEngine.Input;
 import com.lonewolf.lingine.Engine.Rendering.Window;
 import com.lonewolf.lingine.Engine.UI.UIModifier;
 import com.lonewolf.lingine.Engine.UI.UIScalation.AspectScale;
@@ -12,6 +10,12 @@ import com.lonewolf.lingine.Engine.UI.UiComponents.UiBlock;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiButton;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiText;
 import com.lonewolf.lingine.Engine.UI.UiObject;
+import com.lonewolf.lingine.Engine.CoreEngine.Game;
+import com.lonewolf.lingine.Engine.CoreEngine.Input;
+import com.lonewolf.lingine.Engine.UI.UiObjects.UiItemSelection;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Settings extends Game
 {
@@ -32,24 +36,18 @@ public class Settings extends Game
 	{
 		loadBackground();
 		
-//		loadDisplaySettings();
+		loadDisplaySettings();
 		
 		loadMainMenuButton();
 		loadReload();
 	}
 	
-	@Override
-	public void setWindowAttrib(Window window)
-	{
-	
-	}
-	
 	private void loadDisplaySettings()
 	{
-		UiObject background = new UiObject();
+		UiObject background = new UiItemSelection<String>(new ArrayList<>(),0);
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiText(new UiColor(200, 200, 220, 255), "Display", false));
+		background.addComponent(new UiText(new UiColor(200, 200, 220, 255), "Display", true));
 		
 		modifier.setX(new PercentTranslation(0.045f));
 		modifier.setY(new PercentTranslation(0.97f));
@@ -66,7 +64,7 @@ public class Settings extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiText(new UiColor(255, 255, 255, 255), "All Changes Saved Automagicly", false));
+		background.addComponent(new UiText(new UiColor(255, 255, 255, 255), "All Changes Saved Automagicly", true));
 		
 		modifier.setX(new PercentTranslation(0.85f));
 		modifier.setY(new PercentTranslation(0.019f));
@@ -97,7 +95,7 @@ public class Settings extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255, 255, 255, 175), "Return", false));
+		background.addComponent(new UiText(new UiColor(255, 255, 255, 175), "Return", true));
 		
 		modifier.setX(new PercentTranslation(0.85f));
 		modifier.setY(new PercentTranslation(0.08f));

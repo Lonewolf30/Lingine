@@ -3,12 +3,11 @@ package com.lonewolf.lingine.Engine.Rendering;
 
 import com.lonewolf.lingine.Engine.CoreEngine.Util;
 import com.lonewolf.lingine.Engine.Rendering.resourceManagement.TextureResource;
-import com.lonewolf.lingine.Logger;
+import jdk.nashorn.api.scripting.URLReader;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 
@@ -60,15 +59,16 @@ public class Texture
 		    boolean isFile = false;
 		    if (image == null)
             {
-                image = ImageIO.read(new File("./res/texture/" + TextureName));
+            	
+                image = ImageIO.read(ClassLoader.getSystemResource("texture/" + TextureName));
                 isFile = true;
-                if (loadedTextures.get("./res/texture/" + TextureName) != null)
-                    return loadedTextures.get("./res/texture/" + TextureName);
+                if (loadedTextures.get("texture/" + TextureName) != null)
+                    return loadedTextures.get("texture/" + TextureName);
                 
             }
 		    TextureResource resource = getTextureResource(image);
 		    if (isFile)
-		        loadedTextures.put("./res/texture/" + TextureName, resource);
+		        loadedTextures.put("texture/" + TextureName, resource);
 			return resource;
 		}
 		catch (Exception e)

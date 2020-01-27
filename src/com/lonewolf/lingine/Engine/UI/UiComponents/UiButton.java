@@ -1,9 +1,9 @@
 package com.lonewolf.lingine.Engine.UI.UiComponents;
 
-import com.lonewolf.lingine.Engine.CoreEngine.Input;
-import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
 import com.lonewolf.lingine.Engine.UI.UIAnimation.UIAnimator;
 import com.lonewolf.lingine.Engine.UI.UiColor;
+import com.lonewolf.lingine.Engine.CoreEngine.Input;
+import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
 
 public abstract class UiButton extends UiBlock
 {

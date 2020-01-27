@@ -1,11 +1,11 @@
 package com.lonewolf.lingine.Engine.GameComponents;
 
+import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
+import com.lonewolf.lingine.Engine.Rendering.Shader;
 import com.lonewolf.lingine.Engine.CoreEngine.CoreEngine;
 import com.lonewolf.lingine.Engine.CoreEngine.GameObject;
 import com.lonewolf.lingine.Engine.CoreEngine.Input;
 import com.lonewolf.lingine.Engine.CoreEngine.Transform;
-import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
-import com.lonewolf.lingine.Engine.Rendering.Shader;
 
 public abstract class GameComponent
 {

@@ -1,8 +1,8 @@
 package com.lonewolf.lingine.Modules;
 
-import com.lonewolf.lingine.Engine.CoreEngine.Game;
 import com.lonewolf.lingine.Logger;
 import com.lonewolf.lingine.Reference;
+import com.lonewolf.lingine.Engine.CoreEngine.Game;
 
 import java.io.File;
 import java.util.Collection;
@@ -79,7 +79,6 @@ public class ModuleLoader
 				{
 					JarFile jar = new JarFile(mod);
 					Module module = new Module();
-					module.setLoader(this);
 					module.load(jar, mod.getPath());
 					if (module.getErros().size() > 0)
 					{

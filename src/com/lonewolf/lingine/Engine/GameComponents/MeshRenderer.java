@@ -4,7 +4,6 @@ import com.lonewolf.lingine.Engine.Rendering.Material;
 import com.lonewolf.lingine.Engine.Rendering.Mesh;
 import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
 import com.lonewolf.lingine.Engine.Rendering.Shader;
-import com.lonewolf.lingine.Logger;
 
 public class MeshRenderer extends GameComponent
 {

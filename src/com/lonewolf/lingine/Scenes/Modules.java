@@ -2,7 +2,6 @@ package com.lonewolf.lingine.Scenes;
 
 import com.lonewolf.lingine.Engine.CoreEngine.Game;
 import com.lonewolf.lingine.Engine.CoreEngine.Input;
-import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
 import com.lonewolf.lingine.Engine.UI.UIModifier;
 import com.lonewolf.lingine.Engine.UI.UIScalation.AspectScale;
 import com.lonewolf.lingine.Engine.UI.UIScalation.WindowScale;
@@ -10,6 +9,7 @@ import com.lonewolf.lingine.Engine.UI.UITranslation.PercentTranslation;
 import com.lonewolf.lingine.Engine.UI.UiColor;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiBlock;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiButton;
+import com.lonewolf.lingine.Engine.UI.UiComponents.UiComponent;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiText;
 import com.lonewolf.lingine.Engine.UI.UiObject;
 import com.lonewolf.lingine.Logger;
@@ -19,6 +19,10 @@ import java.util.Collection;
 
 public class Modules extends Game
 {
+	private UiText modName;
+	private UiText modVersion;
+	private UiText modDescription;
+	
 	@Override
 	public void init()
 	{
@@ -39,6 +43,37 @@ public class Modules extends Game
 	private void loadMod(Module mod, int offset)
 	{
 		Logger.LogI(mod.getName());
+		UiObject background = new UiObject();
+		UIModifier modifier = new UIModifier();
+		
+		UiText text = new UiText(new UiColor(210,210,200,255), " " + (mod.isEnabled() ? "☑" : "☐") + "    " + mod.getName(), false);
+		
+		background.addComponent(new UiButton(new UiColor(25, 25, 25, 255), 4, -15)
+		{
+			@Override
+			public void run()
+			{
+				mod.setEnabled(!mod.isEnabled());
+				text.setText(" " + (mod.isEnabled() ? "☑" : "☐") + "    " + mod.getName());
+				text.resetTexture();
+			}
+			
+			@Override
+			public int keyBind()
+			{
+				return -1;
+			}
+		});
+		
+		background.addComponent(text);
+		
+		modifier.setX(new PercentTranslation(0.258f));
+		modifier.setY(new PercentTranslation(0.92f-(offset*0.16f)));
+		modifier.setWidth(new WindowScale(0.480f));
+		modifier.setHeight(new WindowScale(0.08f));
+		background.setModifier(modifier);
+		
+		addUiElement(background);
 	}
 	
 	private void loadModListBackground()
@@ -106,7 +141,7 @@ public class Modules extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255, 255, 255, 175), "Return", false));
+		background.addComponent(new UiText(new UiColor(255, 255, 255, 175), "Return", true));
 		
 		modifier.setX(new PercentTranslation(0.85f));
 		modifier.setY(new PercentTranslation(0.08f));

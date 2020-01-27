@@ -1,10 +1,8 @@
 package com.lonewolf.lingine.Modules;
 
-import com.lonewolf.lingine.Engine.CoreEngine.Configuration;
-import com.lonewolf.lingine.Engine.CoreEngine.Game;
 import com.lonewolf.lingine.Logger;
+import com.lonewolf.lingine.Engine.CoreEngine.Game;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -13,7 +11,6 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-@SuppressWarnings("ALL")
 public class Module
 {
 	private String version;
@@ -23,21 +20,21 @@ public class Module
 	
 	private Object baseClass;
 	private Method moduleLoadMethod;
-	private ModuleLoader loader;
+	private boolean enabled;
 	
 	private ArrayList<String> erros;
 	
 	public Module()
 	{
 		erros = new ArrayList<>();
+		enabled = false;
 	}
 	
 	public void load(JarFile module, String path)
 	{
 		try
 		{
-			JarFile jarFile = module;
-			Enumeration<JarEntry> e = jarFile.entries();
+			Enumeration<JarEntry> e = module.entries();
 			
 			URL[] urls = { new URL("jar:file:"+path+"!/") };
 			URLClassLoader cl = URLClassLoader.newInstance(urls);
@@ -61,7 +58,6 @@ public class Module
 					{
 						if (meth.getName().equals("moduleLoad"))
 						{
-							//TODO: newInstance dept, repalce with Constuctor new instance
 							baseClass = meth.getDeclaringClass().newInstance();
 							moduleLoadMethod = meth;
 						}
@@ -118,13 +114,18 @@ public class Module
 		return id;
 	}
 	
-	public void setLoader(ModuleLoader moduleLoader)
-	{
-		this.loader = moduleLoader;
-	}
-	
 	public boolean isSuperMod()
 	{
 		return superMod;
+	}
+	
+	public boolean isEnabled()
+	{
+		return enabled;
+	}
+	
+	public void setEnabled(boolean enabled)
+	{
+		this.enabled = enabled;
 	}
 }

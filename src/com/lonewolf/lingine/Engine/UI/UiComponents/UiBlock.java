@@ -1,10 +1,10 @@
 package com.lonewolf.lingine.Engine.UI.UiComponents;
 
-import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
 import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
 import com.lonewolf.lingine.Engine.Rendering.Shader;
 import com.lonewolf.lingine.Engine.Rendering.Texture;
 import com.lonewolf.lingine.Engine.UI.UiColor;
+import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
 
 import java.awt.image.BufferedImage;
 
@@ -28,7 +28,6 @@ public class UiBlock extends UiComponent
 		BufferedImage image = new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB);
 		image.setRGB(0,0,color.getColor().getRGB());
 		texture = new Texture(image);
-		texture.Bind();
 	}
 	
 	@Override
@@ -41,11 +40,13 @@ public class UiBlock extends UiComponent
 		shader.SetUniform("offset", location.Sub(renderEngine.getWindow().getWindowSize().Div(2)).Div(renderEngine.getWindow().getWindowSize().Div(2)));
 		shader.SetUniformf("r", cornerRadius);
 		
-		if (texture != null)
-			texture.Bind();
-		else
+		if (texture == null)
 			generateTexture();
 		
+		if (renderEngine.hasResized())
+			generateTexture();
+		
+		texture.Bind();
 		shader.Bind();
 		
 		glBegin(GL_TRIANGLE_STRIP);

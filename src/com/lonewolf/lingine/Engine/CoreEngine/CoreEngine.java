@@ -2,8 +2,6 @@ package com.lonewolf.lingine.Engine.CoreEngine;
 
 import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
 import com.lonewolf.lingine.Logger;
-import com.lonewolf.lingine.Main;
-import com.lonewolf.lingine.Modules.ModuleLoader;
 
 import java.io.File;
 
@@ -52,9 +50,8 @@ public class CoreEngine
 	    renderEngine = new RenderingEngine();
 	    
 	    game.setRenderingEngine(renderEngine);
-	    game.setWindowAttrib(renderEngine.getWindow());
 	    
-	    renderEngine.loadAll();
+	    renderEngine.loadAll(this);
 	    
 	    game.setEngine(this);
 	    
@@ -115,7 +112,6 @@ public class CoreEngine
 		this.game = game;
 		game.setPrevGame(prev);
 		game.setRenderingEngine(renderEngine);
-		game.setWindowAttrib(renderEngine.getWindow());
 		game.setEngine(this);
 		game.init();
 	}

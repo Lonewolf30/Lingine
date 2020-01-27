@@ -3,7 +3,6 @@ package com.lonewolf.lingine.Engine.CoreEngine;
 import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
 import com.lonewolf.lingine.Engine.Rendering.Window;
 import com.lonewolf.lingine.Engine.UI.UiObject;
-import com.lonewolf.lingine.Logger;
 
 import java.util.ArrayList;
 
@@ -61,9 +60,6 @@ public abstract class Game
 		renderingEngine.Render2d(uielements);
 		renderingEngine.update();
 	}
-	
-	public void setWindowAttrib(Window window)
-	{}
 	
 	public void Update(float delta)
 	{

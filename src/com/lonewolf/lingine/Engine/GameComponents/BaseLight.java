@@ -1,8 +1,8 @@
 package com.lonewolf.lingine.Engine.GameComponents;
 
+import com.lonewolf.lingine.Engine.Rendering.Shader;
 import com.lonewolf.lingine.Engine.CoreEngine.CoreEngine;
 import com.lonewolf.lingine.Engine.CoreEngine.Vector3f;
-import com.lonewolf.lingine.Engine.Rendering.Shader;
 
 public class BaseLight extends GameComponent
 {

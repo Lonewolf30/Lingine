@@ -1,12 +1,11 @@
 package com.lonewolf.lingine.Engine.UI;
 
+import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
+import com.lonewolf.lingine.Engine.Rendering.Shader;
 import com.lonewolf.lingine.Engine.CoreEngine.CoreEngine;
 import com.lonewolf.lingine.Engine.CoreEngine.Input;
 import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
-import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
-import com.lonewolf.lingine.Engine.Rendering.Shader;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiComponent;
-import com.lonewolf.lingine.Logger;
 
 import java.util.ArrayList;
 

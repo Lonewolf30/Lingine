@@ -1,20 +1,19 @@
 package com.lonewolf.lingine.Scenes;
 
+import com.lonewolf.lingine.Engine.Rendering.Window;
+import com.lonewolf.lingine.Engine.UI.UiColor;
+import com.lonewolf.lingine.Engine.UI.UiObject;
 import com.lonewolf.lingine.Engine.CoreEngine.Game;
 import com.lonewolf.lingine.Engine.CoreEngine.Input;
-import com.lonewolf.lingine.Engine.Rendering.Window;
 import com.lonewolf.lingine.Engine.UI.UIModifier;
 import com.lonewolf.lingine.Engine.UI.UIScalation.AspectScale;
 import com.lonewolf.lingine.Engine.UI.UIScalation.PixelScale;
 import com.lonewolf.lingine.Engine.UI.UIScalation.WindowScale;
 import com.lonewolf.lingine.Engine.UI.UITranslation.PercentTranslation;
-import com.lonewolf.lingine.Engine.UI.UiColor;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiBlock;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiButton;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiImage;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiText;
-import com.lonewolf.lingine.Engine.UI.UiObject;
-import com.lonewolf.lingine.Logger;
 import com.lonewolf.lingine.Modules.ModuleLoader;
 
 public class MainMenu extends Game
@@ -32,11 +31,6 @@ public class MainMenu extends Game
 	public ModuleLoader getLoader()
 	{
 		return loader;
-	}
-	
-	@Override
-	public void setWindowAttrib(Window window)
-	{
 	}
 	
 	@Override
@@ -75,7 +69,7 @@ public class MainMenu extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255,255,255,255), "Load Game", false));
+		background.addComponent(new UiText(new UiColor(255,255,255,255), "Load Game", true));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(0.4375f));
@@ -107,7 +101,7 @@ public class MainMenu extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255,255,255,255), "New Game", false));
+		background.addComponent(new UiText(new UiColor(255,255,255,255), "New Game", true));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(0.5375f));
@@ -138,7 +132,7 @@ public class MainMenu extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255,255,255,255), "Modules", false));
+		background.addComponent(new UiText(new UiColor(255,255,255,255), "Modules", true));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(0.3375f));
@@ -169,7 +163,7 @@ public class MainMenu extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255,255,255,175), "Exit", false));
+		background.addComponent(new UiText(new UiColor(255,255,255,175), "Exit", true));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(0.1f));
@@ -200,7 +194,7 @@ public class MainMenu extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255,255,255,175),"Settings",false));
+		background.addComponent(new UiText(new UiColor(255,255,255,175),"Settings",true));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(0.18f));
@@ -216,7 +210,7 @@ public class MainMenu extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiText(new UiColor(255,255,255,255), "Terms Of Use", false));
+		background.addComponent(new UiText(new UiColor(255,255,255,255), "Terms Of Use", true));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(1-0.971f));

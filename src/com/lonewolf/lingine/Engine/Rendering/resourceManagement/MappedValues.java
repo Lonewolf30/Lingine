@@ -42,4 +42,5 @@ public abstract class MappedValues
 		
 		return 0;
 	}
+	
 }

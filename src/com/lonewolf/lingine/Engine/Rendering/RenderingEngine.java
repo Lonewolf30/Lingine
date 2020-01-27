@@ -1,5 +1,6 @@
 package com.lonewolf.lingine.Engine.Rendering;
 
+import com.lonewolf.lingine.Engine.CoreEngine.CoreEngine;
 import com.lonewolf.lingine.Engine.CoreEngine.GameObject;
 import com.lonewolf.lingine.Engine.CoreEngine.Transform;
 import com.lonewolf.lingine.Engine.CoreEngine.Vector3f;
@@ -8,26 +9,24 @@ import com.lonewolf.lingine.Engine.GameComponents.Camera;
 import com.lonewolf.lingine.Engine.Rendering.resourceManagement.MappedValues;
 import com.lonewolf.lingine.Engine.UI.UiObject;
 import com.lonewolf.lingine.Logger;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.GL_VERSION;
 
 public class RenderingEngine extends MappedValues
 {
 	private HashMap<String, Integer> m_samplerMap;
 	private ArrayList<BaseLight> m_lights;
 	private BaseLight m_activeLight;
-
+	
 	private Shader m_forwardAmbient;
 	private Shader gui;
 	private Camera m_mainCamera;
 	private Window window;
 	private boolean resized;
-
+	
 	public RenderingEngine()
 	{
 		super();
@@ -36,11 +35,16 @@ public class RenderingEngine extends MappedValues
 		window.setRenderEngine(this);
 	}
 	
+	public static String GetOpenGLVersion()
+	{
+		return glGetString(GL_VERSION);
+	}
+	
 	public void setDisplayResized(boolean resized)
 	{
 		this.resized = resized;
 	}
-
+	
 	public void UpdateUniformStruct(Transform transform, Material material, Shader shader, String uniformName, String uniformType)
 	{
 		throw new IllegalArgumentException(uniformType + " is not a supported type in RenderingEngine");
@@ -99,37 +103,32 @@ public class RenderingEngine extends MappedValues
 		glEnable(GL_DEPTH_TEST);
 		glDisable(GL_BLEND);
 	}
-
-	public static String GetOpenGLVersion()
-	{
-		return glGetString(GL_VERSION);
-	}
-
+	
 	public void AddLight(BaseLight light)
 	{
 		m_lights.add(light);
 	}
-
+	
 	public void AddCamera(Camera camera)
 	{
 		m_mainCamera = camera;
 	}
-
+	
 	public int GetSamplerSlot(String samplerName)
 	{
 		return m_samplerMap.get(samplerName);
 	}
-
+	
 	public BaseLight GetActiveLight()
 	{
 		return m_activeLight;
 	}
-
+	
 	public Camera GetMainCamera()
 	{
 		return m_mainCamera;
 	}
-
+	
 	public void SetMainCamera(Camera mainCamera)
 	{
 		this.m_mainCamera = mainCamera;
@@ -145,9 +144,9 @@ public class RenderingEngine extends MappedValues
 		window.update();
 	}
 	
-	public void loadAll()
+	public void loadAll(CoreEngine engine)
 	{
-		window.createWidow();
+		window.createWidow(engine);
 		window.createDisplay();
 		
 		m_lights = new ArrayList<>();
@@ -172,5 +171,10 @@ public class RenderingEngine extends MappedValues
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
 		glEnable(GL_TEXTURE_2D);
+	}
+	
+	public boolean hasResized()
+	{
+		return resized;
 	}
 }

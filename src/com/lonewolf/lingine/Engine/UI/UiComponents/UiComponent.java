@@ -1,10 +1,10 @@
 package com.lonewolf.lingine.Engine.UI.UiComponents;
 
-import com.lonewolf.lingine.Engine.CoreEngine.CoreEngine;
-import com.lonewolf.lingine.Engine.CoreEngine.Input;
 import com.lonewolf.lingine.Engine.Rendering.RenderingEngine;
 import com.lonewolf.lingine.Engine.Rendering.Shader;
 import com.lonewolf.lingine.Engine.UI.UiObject;
+import com.lonewolf.lingine.Engine.CoreEngine.CoreEngine;
+import com.lonewolf.lingine.Engine.CoreEngine.Input;
 
 public class UiComponent
 {
