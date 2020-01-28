@@ -1,8 +1,5 @@
 package com.lonewolf.lingine.Scenes;
 
-import com.lonewolf.lingine.Engine.Rendering.Window;
-import com.lonewolf.lingine.Engine.UI.UiColor;
-import com.lonewolf.lingine.Engine.UI.UiObject;
 import com.lonewolf.lingine.Engine.CoreEngine.Game;
 import com.lonewolf.lingine.Engine.CoreEngine.Input;
 import com.lonewolf.lingine.Engine.UI.UIModifier;
@@ -10,10 +7,12 @@ import com.lonewolf.lingine.Engine.UI.UIScalation.AspectScale;
 import com.lonewolf.lingine.Engine.UI.UIScalation.PixelScale;
 import com.lonewolf.lingine.Engine.UI.UIScalation.WindowScale;
 import com.lonewolf.lingine.Engine.UI.UITranslation.PercentTranslation;
+import com.lonewolf.lingine.Engine.UI.UiColor;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiBlock;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiButton;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiImage;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiText;
+import com.lonewolf.lingine.Engine.UI.UiObject;
 import com.lonewolf.lingine.Modules.ModuleLoader;
 
 public class MainMenu extends Game
@@ -43,7 +42,7 @@ public class MainMenu extends Game
 		modulesButton();
 		settingsButton();
 		exitButton();
-
+		
 		loadNameText();
 		loadMainDispLogo();
 		loadTermOfUse();
@@ -54,7 +53,7 @@ public class MainMenu extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiButton(new UiColor(39, 204, 32,255),4,25)
+		background.addComponent(new UiButton(new UiColor(39, 204, 32, 255), 4, 25)
 		{
 			@Override
 			public void run()
@@ -69,7 +68,7 @@ public class MainMenu extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255,255,255,255), "Load Game", true));
+		background.addComponent(new UiText(new UiColor(255, 255, 255, 255), "Load Game", true));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(0.4375f));
@@ -85,7 +84,7 @@ public class MainMenu extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiButton(new UiColor(39, 204, 32,255),4,25)
+		background.addComponent(new UiButton(new UiColor(39, 204, 32, 255), 4, 25)
 		{
 			@Override
 			public void run()
@@ -101,7 +100,7 @@ public class MainMenu extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255,255,255,255), "New Game", true));
+		background.addComponent(new UiText(new UiColor(255, 255, 255, 255), "New Game", true));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(0.5375f));
@@ -117,7 +116,7 @@ public class MainMenu extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiButton(new UiColor(39, 204, 32,255),4,25)
+		background.addComponent(new UiButton(new UiColor(39, 204, 32, 255), 4, 25)
 		{
 			@Override
 			public void run()
@@ -132,7 +131,7 @@ public class MainMenu extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255,255,255,255), "Modules", true));
+		background.addComponent(new UiText(new UiColor(255, 255, 255, 255), "Modules", true));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(0.3375f));
@@ -148,7 +147,7 @@ public class MainMenu extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiButton(new UiColor(67, 66, 93,255),4,10)
+		background.addComponent(new UiButton(new UiColor(67, 66, 93, 255), 4, 10)
 		{
 			@Override
 			public void run()
@@ -163,7 +162,7 @@ public class MainMenu extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255,255,255,175), "Exit", true));
+		background.addComponent(new UiText(new UiColor(255, 255, 255, 175), "Exit", true));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(0.1f));
@@ -179,7 +178,7 @@ public class MainMenu extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiButton(new UiColor(67, 66, 93,255),4,10)
+		background.addComponent(new UiButton(new UiColor(67, 66, 93, 255), 4, 10)
 		{
 			@Override
 			public void run()
@@ -194,7 +193,7 @@ public class MainMenu extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255,255,255,175),"Settings",true));
+		background.addComponent(new UiText(new UiColor(255, 255, 255, 175), "Settings", true));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(0.18f));
@@ -210,10 +209,10 @@ public class MainMenu extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiText(new UiColor(255,255,255,255), "Terms Of Use", true));
+		background.addComponent(new UiText(new UiColor(255, 255, 255, 255), "Terms Of Use", true));
 		
 		modifier.setX(new PercentTranslation(0.75f));
-		modifier.setY(new PercentTranslation(1-0.971f));
+		modifier.setY(new PercentTranslation(1 - 0.971f));
 		modifier.setWidth(new WindowScale(1));
 		modifier.setHeight(new WindowScale(0.05f));
 		background.setModifier(modifier);
@@ -226,7 +225,7 @@ public class MainMenu extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiImage("MainDisplayLogo.png",0));
+		background.addComponent(new UiImage("MainDisplayLogo.png", 0));
 		
 		modifier.setX(new PercentTranslation(0.25f));
 		modifier.setY(new PercentTranslation(0.5f));
@@ -242,7 +241,7 @@ public class MainMenu extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiImage("NameText.png",0));
+		background.addComponent(new UiImage("NameText.png", 0));
 		
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(0.706f));
@@ -258,7 +257,7 @@ public class MainMenu extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiBlock(new UiColor(50,50,50,255), 0));
+		background.addComponent(new UiBlock(new UiColor(50, 50, 50, 255), 0));
 		
 		modifier.setX(new PercentTranslation(0.5f));
 		modifier.setY(new PercentTranslation(0.5f));

@@ -25,7 +25,7 @@ import java.util.Collection;
 public class Modules extends Game
 {
 	private UiText modName;
-	
+	private UiText enableText;
 	private Module selected;
 	
 	@Override
@@ -34,6 +34,9 @@ public class Modules extends Game
 		loadBackground();
 		
 		loadModListBackground();
+		
+		initText();
+		enableButton();
 		
 		Collection<Module> mods = ((MainMenu)getPrevGame()).getLoader().getModules();
 		
@@ -46,8 +49,12 @@ public class Modules extends Game
 		{
 			loadEmptyMods();
 		}
+		else
+		{
+			selected = (Module) mods.toArray()[0];
+			loadModInfo();
+		}
 		
-		initText();
 		openModsFolder();
 		loadExitButton();
 	}
@@ -72,11 +79,47 @@ public class Modules extends Game
 	
 	private void loadModInfo()
 	{
-		modName.   setText(
+		enableText.setText((selected.isEnabled() ? "Disable" : "Enable"));
+		
+		modName.setText(
 				"Name:    "+selected.getName() + '\n'+
 				"Version: "+selected.getVersion() + '\n'+
-				"Enabled: "+selected.isEnabled()
+				"Enabled: "+selected.isEnabled() + '\n'+
+				"Master Module: " + selected.isSuperMod()
 		);
+	}
+	
+	private void enableButton()
+	{
+		enableText = new UiText(new UiColor(255,255,255,255),"",true);
+		UiObject background = new UiObject();
+		UIModifier modifier = new UIModifier();
+		
+		background.addComponent(new UiButton(new UiColor(67, 66, 93, 255), 4, 10)
+		{
+			@Override
+			public void run()
+			{
+				selected.setEnabled(!selected.isEnabled());
+				loadModInfo();
+			}
+			
+			@Override
+			public int keyBind()
+			{
+				return -1;
+			}
+		});
+		
+		background.addComponent(enableText);
+		
+		modifier.setX(new PercentTranslation(0.90f));
+		modifier.setY(new PercentTranslation(0.18f));
+		modifier.setWidth(new WindowScale(0.115f));
+		modifier.setHeight(new WindowScale(0.063f));
+		background.setModifier(modifier);
+		
+		addUiElement(background);
 	}
 	
 	private void loadEmptyMods()
