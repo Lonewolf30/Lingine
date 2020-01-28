@@ -205,11 +205,11 @@ public class Modules extends Game
 			}
 		});
 		
-		background.addComponent(new UiText(new UiColor(255, 255, 255, 175), "Open Mods Folder", true));
+		background.addComponent(new UiText(new UiColor(255, 255, 255, 175), "Open Modules Folder", true));
 		
-		modifier.setX(new PercentTranslation(0.65f));
+		modifier.setX(new PercentTranslation(0.67f));
 		modifier.setY(new PercentTranslation(0.08f));
-		modifier.setWidth(new WindowScale(0.2f));
+		modifier.setWidth(new WindowScale(0.25f));
 		modifier.setHeight(new WindowScale(0.063f));
 		background.setModifier(modifier);
 		
@@ -238,7 +238,7 @@ public class Modules extends Game
 		
 		background.addComponent(new UiText(new UiColor(255, 255, 255, 175), "Return", true));
 		
-		modifier.setX(new PercentTranslation(0.85f));
+		modifier.setX(new PercentTranslation(0.90f));
 		modifier.setY(new PercentTranslation(0.08f));
 		modifier.setWidth(new WindowScale(0.115f));
 		modifier.setHeight(new WindowScale(0.063f));
