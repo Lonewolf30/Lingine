@@ -5,6 +5,9 @@ import com.lonewolf.lingine.Engine.UI.UiColor;
 import com.lonewolf.lingine.Engine.CoreEngine.Input;
 import com.lonewolf.lingine.Engine.CoreEngine.Vector2f;
 
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glBindTexture;
+
 public abstract class UiButton extends UiBlock
 {
 	private boolean inced;
@@ -34,7 +37,10 @@ public abstract class UiButton extends UiBlock
 		
 		if (inced)
 			if (input.GetMouseDown(0))
+			{
 				run();
+				glBindTexture(GL_TEXTURE_2D, 0);
+			}
 		
 		if (location.GetX() - scale.GetX() / 2 < mousePos.GetX() && mousePos.GetX() < location.GetX() + scale.GetX() / 2)
 		{

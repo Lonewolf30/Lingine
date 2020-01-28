@@ -67,7 +67,7 @@ public class Module
 				}
 			}
 			
-			checkErrors(moduleLoadMethod.getClass());
+			checkErrors();
 			
 			if (moduleLoadMethod == null)
 				erros.add("No moduleLoad method found");
@@ -77,7 +77,7 @@ public class Module
 		}
 	}
 	
-	private void checkErrors(Class baseClass)
+	private void checkErrors()
 	{
 		if (!id.toLowerCase().equals(id))
 			erros.add(name +  ": moduleID needs to be lowercase");

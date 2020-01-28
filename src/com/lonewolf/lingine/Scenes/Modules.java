@@ -4,6 +4,7 @@ import com.lonewolf.lingine.Engine.CoreEngine.Game;
 import com.lonewolf.lingine.Engine.CoreEngine.Input;
 import com.lonewolf.lingine.Engine.UI.UIModifier;
 import com.lonewolf.lingine.Engine.UI.UIScalation.AspectScale;
+import com.lonewolf.lingine.Engine.UI.UIScalation.PixelScale;
 import com.lonewolf.lingine.Engine.UI.UIScalation.WindowScale;
 import com.lonewolf.lingine.Engine.UI.UITranslation.PercentTranslation;
 import com.lonewolf.lingine.Engine.UI.UiColor;
@@ -14,14 +15,18 @@ import com.lonewolf.lingine.Engine.UI.UiComponents.UiText;
 import com.lonewolf.lingine.Engine.UI.UiObject;
 import com.lonewolf.lingine.Logger;
 import com.lonewolf.lingine.Modules.Module;
+import com.lonewolf.lingine.Reference;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 
 public class Modules extends Game
 {
 	private UiText modName;
-	private UiText modVersion;
-	private UiText modDescription;
+	
+	private Module selected;
 	
 	@Override
 	public void init()
@@ -37,7 +42,58 @@ public class Modules extends Game
 			loadMod((Module) mods.toArray()[i], i);
 		}
 		
+		if (mods.size() == 0)
+		{
+			loadEmptyMods();
+		}
+		
+		initText();
+		openModsFolder();
 		loadExitButton();
+	}
+	
+	private void initText()
+	{
+		modName = new UiText(new UiColor(255,255,255,255),"", false);
+		
+		UiObject background = new UiObject();
+		UIModifier modifier = new UIModifier();
+		
+		background.addComponent(modName);
+		
+		modifier.setX(new PercentTranslation(0.76f));
+		modifier.setY(new PercentTranslation(0.5f));
+		modifier.setWidth(new WindowScale(0.49f));
+		modifier.setHeight(new WindowScale(0.95f));
+		background.setModifier(modifier);
+		
+		addUiElement(background);
+	}
+	
+	private void loadModInfo()
+	{
+		modName.   setText(
+				"Name:    "+selected.getName() + '\n'+
+				"Version: "+selected.getVersion() + '\n'+
+				"Enabled: "+selected.isEnabled()
+		);
+	}
+	
+	private void loadEmptyMods()
+	{
+		UiObject background = new UiObject();
+		UIModifier modifier = new UIModifier();
+		
+		background.addComponent(new UiBlock(new UiColor(25, 25, 25, 255), 4));
+		background.addComponent(new UiText(new UiColor(200,200,200,255), "No Modules Loaded", true));
+		
+		modifier.setX(new PercentTranslation(0.26f));
+		modifier.setY(new PercentTranslation(0.90f));
+		modifier.setWidth(new PixelScale(200));
+		modifier.setHeight(new PixelScale(40));
+		background.setModifier(modifier);
+		
+		addUiElement(background);
 	}
 	
 	private void loadMod(Module mod, int offset)
@@ -46,16 +102,15 @@ public class Modules extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		UiText text = new UiText(new UiColor(210,210,200,255), " " + (mod.isEnabled() ? "☑" : "☐") + "    " + mod.getName(), false);
+		UiText text = new UiText(new UiColor(210,210,200,255), " "+mod.getName(), false);
 		
 		background.addComponent(new UiButton(new UiColor(25, 25, 25, 255), 4, -15)
 		{
 			@Override
 			public void run()
 			{
-				mod.setEnabled(!mod.isEnabled());
-				text.setText(" " + (mod.isEnabled() ? "☑" : "☐") + "    " + mod.getName());
-				text.resetTexture();
+				selected = mod;
+				loadModInfo();
 			}
 			
 			@Override
@@ -116,6 +171,46 @@ public class Modules extends Game
 		modifier.setY(new PercentTranslation(0.5f));
 		modifier.setWidth(new WindowScale(1));
 		modifier.setHeight(new AspectScale());
+		background.setModifier(modifier);
+		
+		addUiElement(background);
+	}
+	
+	private void openModsFolder()
+	{
+		UiObject background = new UiObject();
+		UIModifier modifier = new UIModifier();
+		
+		background.addComponent(new UiButton(new UiColor(67, 66, 93, 255), 4, 10)
+		{
+			@Override
+			public void run()
+			{
+				File file = new File (Reference.fileDirectory + "modules/");
+				Desktop desktop = Desktop.getDesktop();
+				try
+				{
+					desktop.open(file);
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public int keyBind()
+			{
+				return -1;
+			}
+		});
+		
+		background.addComponent(new UiText(new UiColor(255, 255, 255, 175), "Open Mods Folder", true));
+		
+		modifier.setX(new PercentTranslation(0.65f));
+		modifier.setY(new PercentTranslation(0.08f));
+		modifier.setWidth(new WindowScale(0.2f));
+		modifier.setHeight(new WindowScale(0.063f));
 		background.setModifier(modifier);
 		
 		addUiElement(background);

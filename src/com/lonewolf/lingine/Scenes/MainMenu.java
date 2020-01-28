@@ -215,7 +215,7 @@ public class MainMenu extends Game
 		modifier.setX(new PercentTranslation(0.75f));
 		modifier.setY(new PercentTranslation(1-0.971f));
 		modifier.setWidth(new WindowScale(1));
-		modifier.setHeight(new WindowScale(0.03f));
+		modifier.setHeight(new WindowScale(0.05f));
 		background.setModifier(modifier);
 		
 		addUiElement(background);

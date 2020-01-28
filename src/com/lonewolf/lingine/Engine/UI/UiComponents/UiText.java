@@ -81,6 +81,7 @@ public class UiText extends UiBlock
 	public void setText(String text)
 	{
 		this.text = text;
+		resetTexture();
 	}
 	
 	@Override
