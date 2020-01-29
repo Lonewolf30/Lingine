@@ -1,8 +1,12 @@
 package com.lonewolf.lingine.Modules;
 
+import com.lonewolf.lingine.Engine.CoreEngine.Configuration;
+import com.lonewolf.lingine.Engine.Resource.Resource;
+import com.lonewolf.lingine.Engine.Resource.ResourceLoader;
 import com.lonewolf.lingine.Logger;
 import com.lonewolf.lingine.Engine.CoreEngine.Game;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -17,16 +21,19 @@ public class Module
 	private String name;
 	private String id;
 	private boolean superMod;
+	private ResourceLoader resourceLoader;
+	private Configuration configuration;
 	
 	private Object baseClass;
 	private Method moduleLoadMethod;
 	private boolean enabled;
 	
-	private ArrayList<String> erros;
+	private ArrayList<String> errors;
 	
 	public Module()
 	{
-		erros = new ArrayList<>();
+		errors = new ArrayList<>();
+		resourceLoader = new ResourceLoader();
 		enabled = false;
 	}
 	
@@ -40,9 +47,20 @@ public class Module
 			URLClassLoader cl = URLClassLoader.newInstance(urls);
 			while (e.hasMoreElements()) {
 				JarEntry je = e.nextElement();
-				if(je.isDirectory() || !je.getName().endsWith(".class") || je.getName().contains("META")){
+				if(je.isDirectory() || je.getName().contains("META")){
 					continue;
 				}
+				
+				if (!je.getName().endsWith(".class"))
+				{
+					String[] data = je.getName().split("/");
+					String type = data[data.length-1].substring(data[data.length-1].lastIndexOf(".")+1);
+					String name = data[data.length-1].replace("."+type,"");
+					Resource resource = new Resource(name, type, cl.getResource(je.getName()));
+					resourceLoader.addResource(name,resource);
+					continue;
+				}
+				
 				String className = je.getName().substring(0,je.getName().length()-6);
 				className = className.replace('/', '.');
 				Class c = cl.loadClass(className);
@@ -63,14 +81,21 @@ public class Module
 						}
 					}
 					
-					
+					for (Field field:c.getDeclaredFields())
+					{
+						if (field.isAnnotationPresent(com.lonewolf.lingine.Modules.Resource.class))
+						{
+							field.setAccessible(true);
+							field.set(baseClass,resourceLoader);
+						}
+					}
 				}
 			}
 			
 			checkErrors();
 			
 			if (moduleLoadMethod == null)
-				erros.add("No moduleLoad method found");
+				errors.add("No moduleLoad method found");
 		} catch (Exception e)
 		{
 			Logger.LogE(e);
@@ -80,7 +105,7 @@ public class Module
 	private void checkErrors()
 	{
 		if (!id.toLowerCase().equals(id))
-			erros.add(name +  ": moduleID needs to be lowercase");
+			errors.add(name +  ": moduleID needs to be lowercase");
 	}
 	
 	public void loadModule(Game game)
@@ -94,9 +119,9 @@ public class Module
 		}
 	}
 	
-	public ArrayList<String> getErros()
+	public ArrayList<String> getErrors()
 	{
-		return erros;
+		return errors;
 	}
 	
 	public String getVersion()
@@ -127,5 +152,12 @@ public class Module
 	public void setEnabled(boolean enabled)
 	{
 		this.enabled = enabled;
+		configuration.setConfigValue(id, String.valueOf(enabled));
+		configuration.saveConfig();
+	}
+	
+	public void setConfiguration(Configuration configuration)
+	{
+		this.configuration = configuration;
 	}
 }

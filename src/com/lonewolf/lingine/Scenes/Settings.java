@@ -1,6 +1,7 @@
 package com.lonewolf.lingine.Scenes;
 
-import com.lonewolf.lingine.Engine.Rendering.Window;
+import com.lonewolf.lingine.Engine.CoreEngine.Game;
+import com.lonewolf.lingine.Engine.CoreEngine.Input;
 import com.lonewolf.lingine.Engine.UI.UIModifier;
 import com.lonewolf.lingine.Engine.UI.UIScalation.AspectScale;
 import com.lonewolf.lingine.Engine.UI.UIScalation.WindowScale;
@@ -10,12 +11,9 @@ import com.lonewolf.lingine.Engine.UI.UiComponents.UiBlock;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiButton;
 import com.lonewolf.lingine.Engine.UI.UiComponents.UiText;
 import com.lonewolf.lingine.Engine.UI.UiObject;
-import com.lonewolf.lingine.Engine.CoreEngine.Game;
-import com.lonewolf.lingine.Engine.CoreEngine.Input;
 import com.lonewolf.lingine.Engine.UI.UiObjects.UiItemSelection;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Settings extends Game
 {
@@ -64,12 +62,12 @@ public class Settings extends Game
 		UiObject background = new UiObject();
 		UIModifier modifier = new UIModifier();
 		
-		background.addComponent(new UiText(new UiColor(255, 255, 255, 255), "All Changes Saved Automagicly", true));
+		background.addComponent(new UiText(new UiColor(255, 255, 255, 255), "All Changes Saved Automatically", true));
 		
 		modifier.setX(new PercentTranslation(0.85f));
 		modifier.setY(new PercentTranslation(0.019f));
 		modifier.setWidth(new WindowScale(1));
-		modifier.setHeight(new WindowScale(0.03f));
+		modifier.setHeight(new WindowScale(0.04f));
 		background.setModifier(modifier);
 		
 		addUiElement(background);

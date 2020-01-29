@@ -4,10 +4,20 @@ import java.util.HashMap;
 
 public class ResourceLoader
 {
-	private HashMap<String, Resources> resource;
+	private HashMap<String, Resource> resources;
 	
 	public ResourceLoader()
 	{
-		resource = new HashMap<>();
+		resources = new HashMap<>();
+	}
+	
+	public void addResource(String name, Resource resource)
+	{
+		this.resources.put(name,resource);
+	}
+	
+	public Resource getResource(String name)
+	{
+		return resources.get(name);
 	}
 }

@@ -22,15 +22,13 @@
     <mainClass>com.lonewolf.lingine.Main</mainClass>
   </classPath>
   <jre>
-    <path>dist\jre</path>
-    <bundledJre64Bit>false</bundledJre64Bit>
-    <bundledJreAsFallback>false</bundledJreAsFallback>
-    <minVersion>1.8.0</minVersion>
+    <path>jre</path>
+    <bundledJre64Bit>true</bundledJre64Bit>
+    <bundledJreAsFallback>true</bundledJreAsFallback>
+    <minVersion></minVersion>
     <maxVersion></maxVersion>
     <jdkPreference>jdkOnly</jdkPreference>
     <runtimeBits>64/32</runtimeBits>
-    <initialHeapSize>2048</initialHeapSize>
-    <maxHeapSize>16384</maxHeapSize>
   </jre>
   <versionInfo>
     <fileVersion>1.0.0.0</fileVersion>

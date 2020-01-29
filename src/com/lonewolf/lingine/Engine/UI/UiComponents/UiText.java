@@ -15,30 +15,34 @@ public class UiText extends UiBlock
 {
 	private String text;
 	private Boolean resizeText;
+	private Vector2f location;
 	
 	public UiText(UiColor color, String text, Boolean resizeText)
 	{
 		super(color, 0);
 		this.text = text;
 		this.resizeText = resizeText;
+		location = new Vector2f(0,0);
 	}
 	
 	//TODO: LEFT, CENTER, RIGHT versions
 	private BufferedImage getImage(Vector2f size)
 	{
+		if (size.GetX() < 1)
+			size.SetX(1);
+		if (size.GetY() < 1)
+			size.SetY(1);
+		BufferedImage img = new BufferedImage((int) size.GetX(), (int) size.GetY(), BufferedImage.TYPE_INT_ARGB);
 		if (resizeText)
 		{
-			if (size.GetX() < 1)
-				size.SetX(1);
-			if (size.GetY() < 1)
-				size.SetY(1);
-			BufferedImage img = new BufferedImage((int) size.GetX(), (int) size.GetY(), BufferedImage.TYPE_INT_ARGB);
 			Graphics2D g2d = img.createGraphics();
 			g2d.setPaint(color.getColor());
 			g2d.setFont(new Font("Source Sans Pro", Font.PLAIN, Math.round(img.getHeight() * 0.5f)));
 			FontMetrics fm = g2d.getFontMetrics();
+			
 			int x = (img.getWidth() - fm.stringWidth(text)) / 2;
 			int y = fm.getHeight() + fm.getHeight() / 100000;
+			
 			g2d.drawString(text, x, y / 0.9f);
 			g2d.dispose();
 			
@@ -49,15 +53,15 @@ public class UiText extends UiBlock
 			return newImage;
 		} else
 		{
-			if (size.GetX() < 1)
-				size.SetX(1);
-			if (size.GetY() < 1)
-				size.SetY(1);
-			BufferedImage img = new BufferedImage((int) size.GetX(), (int) size.GetY(), BufferedImage.TYPE_INT_ARGB);
+			
 			Graphics2D g2d = img.createGraphics();
 			g2d.setPaint(color.getColor());
 			g2d.setFont(new Font("Source Sans Pro", Font.PLAIN, 16));
 			FontMetrics fm = g2d.getFontMetrics();
+			
+			int x = (img.getWidth() - fm.stringWidth(text)) / 2;
+			int y = fm.getHeight() + fm.getHeight() / 100000;
+			
 			float inc = 1;
 			for (String line : text.split("\n"))
 			{
@@ -73,6 +77,8 @@ public class UiText extends UiBlock
 			return newImage;
 		}
 	}
+	
+	
 	
 	protected void generateTexture(Vector2f windowSize)
 	{

@@ -11,6 +11,7 @@ public class Configuration
 {
 	private HashMap<String, String> configs;
 	private String configName;
+	private File configFile;
 	
 	public Configuration()
 	{
@@ -34,12 +35,21 @@ public class Configuration
 		return new File(String.format("%s", ProjectName));
 	}
 	
+	public void loadConfigurationFile(String filePath)
+	{
+		File configFile = new File(filePath);
+		configName = configFile.getName();
+		this.configFile = configFile;
+	}
+	
 	public void loadConfigurationFile(File configurationFile)
 	{
-		configName = configurationFile.getName();
-		
-		Logger.LogD(configName);
-		File configFile = new File(getDirectory().getAbsoluteFile() + "/" + configName + ".cfg");
+		configFile = configurationFile;
+		loadConfiguration();
+	}
+	
+	private void loadConfiguration()
+	{
 		if (!configFile.exists())
 		{
 			try
@@ -103,7 +113,7 @@ public class Configuration
 	{
 		try
 		{
-			BufferedWriter writer = new BufferedWriter(new FileWriter(getDirectory().getAbsoluteFile() + "/" + configName + ".cfg"));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(configFile));
 			
 			for (Map.Entry<String, String> entry : configs.entrySet())
 			{

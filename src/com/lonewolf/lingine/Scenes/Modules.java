@@ -36,7 +36,6 @@ public class Modules extends Game
 		loadModListBackground();
 		
 		initText();
-		enableButton();
 		
 		Collection<Module> mods = ((MainMenu)getPrevGame()).getLoader().getModules();
 		
@@ -51,6 +50,7 @@ public class Modules extends Game
 		}
 		else
 		{
+			enableButton();
 			selected = (Module) mods.toArray()[0];
 			loadModInfo();
 		}
@@ -166,7 +166,7 @@ public class Modules extends Game
 		background.addComponent(text);
 		
 		modifier.setX(new PercentTranslation(0.258f));
-		modifier.setY(new PercentTranslation(0.92f-(offset*0.16f)));
+		modifier.setY(new PercentTranslation(0.92f-(offset*0.09f)));
 		modifier.setWidth(new WindowScale(0.480f));
 		modifier.setHeight(new WindowScale(0.08f));
 		background.setModifier(modifier);
